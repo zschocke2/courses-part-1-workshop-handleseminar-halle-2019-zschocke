@@ -1,5 +1,4 @@
-title: Part 1 - Workshop Handleseminar-Halle 2019 (zschocke)
+title: Part 2 - Workshop Handleseminar-Halle 2019 (zschocke)
 description: Course description goes here.
 programming_language: r
-from: "r-base-prod:v1.0.2"
-#from: "tidyverse-base-prod:v1.0.2"
+from: 'r-base-prod:v1.0.2'
