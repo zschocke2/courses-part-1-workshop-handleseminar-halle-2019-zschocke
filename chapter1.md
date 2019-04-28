@@ -1,9 +1,9 @@
 ---
-title: 'Chapter Title Here'
+title: Crosscorrelation
 description: 'Chapter description goes here.'
 ---
 
-## Example coding exercise
+## Load and plot RRI data
 
 ```yaml
 type: NormalExercise
