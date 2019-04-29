@@ -17,11 +17,14 @@ In our second workshop we will have a look on R-peaks and respiration data.
 
 But let's simply start with R-peaks, R-peaks are derived from ECGs and describes the point of the main heart contraction. Here we use a dataset of 36 000 heart beats from a signle night of a random subject in the sleep laboratories of Charité Berlin. 
 
-First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to 
+First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to devide each point by the sampling rate to obtain the time in seconds.
+Furthermore we can calculate the heart rate as the reciprocal of the R-R distance/RR-interval (RRI)
+
 
 `@instructions`
 1. Load data 
-2. Convert R-peak-points into
+2. Convert R-peak-points into time in seconds
+3. Calculate the heart rate. Use the first R-Interval as the time point of the heart rate.
 
 `@hint`
 
@@ -36,6 +39,8 @@ download.file(url='https://assets.datacamp.com/production/repositories/4882/data
 ```{r}
 # Load data
 rri <- scan('data.rri')
+
+
 ```
 
 `@solution`
