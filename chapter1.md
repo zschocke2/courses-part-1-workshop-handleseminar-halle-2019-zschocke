@@ -13,7 +13,7 @@ xp: 100
 skills: 1
 ```
 
-This is an example exercise.
+In our second workshop we will have a look 
 
 `@instructions`
 
@@ -51,7 +51,7 @@ key: e8803cd778
 xp: 100
 ```
 
-
+Calculate heart rate from RRI
 
 `@instructions`
 
@@ -89,6 +89,7 @@ key: d276edac58
 xp: 100
 ```
 
+resample heart rate data from RRI (to obtain sampling rate as respiration signal) 
 
 
 `@instructions`
