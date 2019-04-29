@@ -13,7 +13,7 @@ xp: 100
 skills: 1
 ```
 
-In our second workshop we will have a look 
+In our second workshop we will have a look
 
 `@instructions`
 
@@ -89,8 +89,7 @@ key: d276edac58
 xp: 100
 ```
 
-resample heart rate data from RRI (to obtain sampling rate as respiration signal) 
-
+resample heart rate data from RRI (to obtain sampling rate as respiration signal)
 
 `@instructions`
 
@@ -167,7 +166,6 @@ xp: 100
 ```
 
 How to calculate crosscorrelation
-
 
 `@instructions`
 
