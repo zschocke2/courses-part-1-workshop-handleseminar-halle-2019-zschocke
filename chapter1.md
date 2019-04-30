@@ -38,9 +38,13 @@ download.file(url='https://assets.datacamp.com/production/repositories/4882/data
 `@sample_code`
 ```{r}
 # Load data
-rri <- scan('data.rri')
+data <- scan('data.rri')/256
 
+# Calculate RRI
+rri <- diff(data)
 
+# Plot
+ggplot(data[1:length(data)-1],rri)
 ```
 
 `@solution`
@@ -73,12 +77,25 @@ Calculate heart rate from RRI
 
 `@pre_exercise_code`
 ```{r}
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/a47837f5a7199b0c6ffad81d989c52011c62ada5/SL196.rri',destfile='data.rri')
 
+# Load data
+data <- scan('data.rri')/256
+
+# Calculate RRI
+rri <- diff(data)
+
+# Calculate time
+time <- data[1:(length(data)-1)]
 ```
 
 `@sample_code`
 ```{r}
+# Calculate heart rate in beats per minute
+hf <- 60/rri
 
+# plot heart rate
+plot(datime,hf)
 ```
 
 `@solution`
