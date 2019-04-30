@@ -150,6 +150,17 @@ hf <- 60/rri
 `@sample_code`
 ```{r}
 # Delete all entries lower then 40 beats/min and higher then 120 beats/min. 
+hf_new <- c()
+time_new <- c()
+
+for (i in 1:length(hf)){
+  if ((hf[i] > 40) & (hf[i] <120)){
+   hf_new <- append(hf_new,hf[i])
+    time_new <- append(time_new,time[i])
+  } 
+}
+
+plot(time_new[1:100],hf_new[1:100])
 ```
 
 `@solution`
@@ -172,7 +183,13 @@ key: d276edac58
 xp: 100
 ```
 
-resample heart rate data from RRI (to obtain sampling rate as respiration signal)
+In the next step we want to compare RRI and resample heart rate data from RRI (to obtain sampling rate as respiration signal)
+
+approx(x,y,xout)
+x - x values
+y - values
+xout - series of new datapoints
+
 
 `@instructions`
 
@@ -182,11 +199,44 @@ resample heart rate data from RRI (to obtain sampling rate as respiration signal
 
 `@pre_exercise_code`
 ```{r}
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
+
+# Load data
+data <- scan('data.rri')/256
+
+# Calculate RRI
+rri <- diff(data)
+
+# Calculate time
+time <- data[1:(length(data)-1)]
+
+# Calculate heart rate in beats per minute
+hf <- 60/rri
+
+# Delete all entries lower then 40 beats/min and higher then 120 beats/min. 
+hf_new <- c()
+time_new <- c()
+
+for (i in 1:length(hf)){
+  if ((hf[i] > 40) & (hf[i] <120)){
+   hf_new <- append(hf_new,hf[i])
+    time_new <- append(time_new,time[i])
+  } 
+}
 
 ```
 
 `@sample_code`
 ```{r}
+# Resample hf_new data
+xout <- seq(0,3600,1/32)
+approx <- approx(x = time_new, y = hf_new,xout=xout)
+time <- approx$x
+hf <- approx$y
+
+plot(time,hf)
+
+
 
 ```
 
@@ -220,11 +270,41 @@ xp: 100
 
 `@pre_exercise_code`
 ```{r}
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/2f017b9ab004f77a7d3a8a1151b3fac09680f5e7/SL196_thorax.txt',destfile='respiration.dat'
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 
+# Load data
+data <- scan('data.rri')/256
+
+# Calculate RRI
+rri <- diff(data)
+
+# Calculate time
+time <- data[1:(length(data)-1)]
+
+# Calculate heart rate in beats per minute
+hf <- 60/rri
+
+# Delete all entries lower then 40 beats/min and higher then 120 beats/min. 
+hf_new <- c()
+time_new <- c()
+
+for (i in 1:length(hf)){
+  if ((hf[i] > 40) & (hf[i] <120)){
+   hf_new <- append(hf_new,hf[i])
+    time_new <- append(time_new,time[i])
+  } 
+}
 ```
 
 `@sample_code`
 ```{r}
+# Load respiration data
+data <- scan('respiration.dat')
+length(data)
+time_data <- seq(0,3600,1/4)
+length(time_data)
+#plot()
 
 ```
 
