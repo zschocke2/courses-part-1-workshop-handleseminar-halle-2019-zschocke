@@ -324,7 +324,7 @@ plot(time_data,data,xlim=c(0,100),ylim=c(-100,100))
 
 ---
 
-## Synchronisation via Crosscorrelation - Part I
+## Synchronisation via Crosscorrelation
 
 ```yaml
 type: NormalExercise
@@ -415,6 +415,7 @@ corr_ts <- seq(-64,64)
 for (ts in corr_ts){
 	corr <- append(corr,correlation(data,hf,ts))
 }
+corr_ts <- corr_ts/32
 plot(corr_ts,corr)
 ```
 
@@ -430,38 +431,26 @@ plot(corr_ts,corr)
 
 ---
 
-## Synchronisation via Crosscorrelation - Part II
+## Insert exercise title here
 
 ```yaml
-type: NormalExercise
-key: cc151fae3d
-xp: 100
+type: PureMultipleChoiceExercise
+key: 11a8387479
+xp: 50
 ```
 
-Find timeshift
+Let's check the result from the last task again!
+![](https://assets.datacamp.com/production/repositories/4882/datasets/19cb7f8ba735d63a8c65f4e3c23c6fb19e60534a/corr.png)
 
-`@instructions`
-
+So we moved shifted the heart rate again the respiration. What is the time shift between respiration signal and heart rate signal? 
 
 `@hint`
 
 
-`@pre_exercise_code`
-```{r}
+`@possible_answers`
+1. [+1.5 s]
+2. -1.5 s
+3. 7 s
+4. 0 s
 
-```
-
-`@sample_code`
-```{r}
-
-```
-
-`@solution`
-```{r}
-
-```
-
-`@sct`
-```{r}
-
-```
+`@feedback`
