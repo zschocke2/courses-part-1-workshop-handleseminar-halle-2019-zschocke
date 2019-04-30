@@ -31,7 +31,7 @@ Furthermore we can calculate the heart rate as the reciprocal of the R-R distanc
 
 `@pre_exercise_code`
 ```{r}
-download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/a47837f5a7199b0c6ffad81d989c52011c62ada5/SL196.rri',destfile='data.rri')
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 
 ```
 
@@ -80,7 +80,7 @@ Calculate heart rate from RRI
 
 `@pre_exercise_code`
 ```{r}
-download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/a47837f5a7199b0c6ffad81d989c52011c62ada5/SL196.rri',destfile='data.rri')
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 
 # Load data
 data <- scan('data.rri')/256
@@ -98,7 +98,58 @@ time <- data[1:(length(data)-1)]
 hf <- 60/rri
 
 # plot heart rate
-plot(datime,hf)
+plot(time,hf)
+```
+
+`@solution`
+```{r}
+
+```
+
+`@sct`
+```{r}
+
+```
+
+---
+
+## Filter
+
+```yaml
+type: NormalExercise
+key: 5f3db91f6e
+xp: 100
+```
+
+Unrealisic heart frequence during sleep lower 40 higher 120 beats/min
+
+`@instructions`
+
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
+
+# Load data
+data <- scan('data.rri')/256
+
+# Calculate RRI
+rri <- diff(data)
+
+# Calculate time
+time <- data[1:(length(data)-1)]
+
+# Calculate heart rate in beats per minute
+hf <- 60/rri
+
+```
+
+`@sample_code`
+```{r}
+# Delete all entries lower then 40 beats/min and higher then 120 beats/min. 
 ```
 
 `@solution`
