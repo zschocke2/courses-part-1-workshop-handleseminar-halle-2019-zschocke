@@ -386,7 +386,7 @@ data <- data[1:(length(data)-128)]
 # ts - timeshift
 # fs - sampling frequency (both the same)
 # series1 and series2 must have the same length
-correlation <- function(series1,series2,ts,fs) {
+correlation <- function(series1,series2,tau) {
   # Calculate lenght 
   n1 <- length(series1)
   n2 <- length(series2)
@@ -396,11 +396,11 @@ correlation <- function(series1,series2,ts,fs) {
   }
   
   # lenght of used data
-  n <- as.integer(n1-ts*fs)
   if (ts >= 0){
-  	corr <- sum(series1[1:as.integer(n1-ts*fs)]*series2[as.integer(1+ts*fs):n1])/n
+  	corr <- sum(series1[1:(n1-tau)]*series2[(1+tau):n1])/(n1-tau)
+
   } else{
-    corr <- sum(series1[as.integer(1+abs(ts)*fs):n1]*series2[1:as.integer(n1-abs(ts)*fs)])/n
+    corr <- sum(series1[(1-tau):n1]*series2[1:(n1+tau)])/(n1-tau)
   }
   # Calculate correlation of series1 and series2 with shift ts of series2
   
@@ -411,9 +411,9 @@ length(data)
 length(hf)
 
 corr <- c()
-corr_ts <- seq(-3,3,by=0.1)
+corr_ts <- seq(-64,64)
 for (ts in corr_ts){
-	corr <- append(corr,correlation(data,hf,ts,32))
+	corr <- append(corr,correlation(data,hf,ts))
 }
 plot(corr_ts,corr)
 ```
