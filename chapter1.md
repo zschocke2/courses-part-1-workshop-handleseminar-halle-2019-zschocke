@@ -1,6 +1,7 @@
 ---
 title: Crosscorrelation
 description: 'Chapter description goes here.'
+free_preview: true
 ---
 
 ## Load and plot RRI data
