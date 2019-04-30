@@ -270,7 +270,7 @@ xp: 100
 
 `@pre_exercise_code`
 ```{r}
-download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/2f017b9ab004f77a7d3a8a1151b3fac09680f5e7/SL196_thorax.txt',destfile='respiration.dat'
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/2f017b9ab004f77a7d3a8a1151b3fac09680f5e7/SL196_thorax.txt',destfile='respiration.dat')
 download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 
 # Load data
@@ -302,9 +302,9 @@ for (i in 1:length(hf)){
 # Load respiration data
 data <- scan('respiration.dat')
 length(data)
-time_data <- seq(0,3600,1/4)
-length(time_data)
-#plot()
+time_data <- seq(0,(3600-1/32),1/32)
+plot(time_data,data)
+
 
 ```
 
