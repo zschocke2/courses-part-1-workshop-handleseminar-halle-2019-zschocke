@@ -20,7 +20,6 @@ But let's simply start with R-peaks, R-peaks are derived from ECGs and describes
 First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to devide each point by the sampling rate to obtain the time in seconds.
 Furthermore we can calculate the heart rate as the reciprocal of the R-R distance/RR-interval (RRI)
 
-
 `@instructions`
 1. Load data 
 2. Convert R-peak-points into time in seconds
