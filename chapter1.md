@@ -43,8 +43,11 @@ data <- scan('data.rri')/256
 # Calculate RRI
 rri <- diff(data)
 
+# Calculate timestamps
+time <- data[1:length(data)-1]
+             
 # Plot
-ggplot(data[1:length(data)-1],rri)
+plot(time,rri)
 ```
 
 `@solution`
