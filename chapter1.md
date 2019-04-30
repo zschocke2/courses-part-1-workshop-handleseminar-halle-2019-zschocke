@@ -190,7 +190,6 @@ x - x values
 y - values
 xout - series of new datapoints
 
-
 `@instructions`
 
 
