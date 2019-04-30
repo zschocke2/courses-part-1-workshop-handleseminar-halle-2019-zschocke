@@ -270,7 +270,7 @@ xp: 100
 
 `@pre_exercise_code`
 ```{r}
-download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/2f017b9ab004f77a7d3a8a1151b3fac09680f5e7/SL196_thorax.txt',destfile='respiration.dat')
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/f2663aa0a45d1bce64f9bbb6c8eb733aabbaca9e/SL196_thorax.txt',destfile='respiration.dat')
 download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 
 # Load data
@@ -343,7 +343,42 @@ How to calculate crosscorrelation
 
 `@pre_exercise_code`
 ```{r}
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/f2663aa0a45d1bce64f9bbb6c8eb733aabbaca9e/SL196_thorax.txt',destfile='respiration.dat')
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 
+# Load data
+data <- scan('data.rri')/256
+
+# Calculate RRI
+rri <- diff(data)
+
+# Calculate time
+time <- data[1:(length(data)-1)]
+
+# Calculate heart rate in beats per minute
+hf <- 60/rri
+
+# Delete all entries lower then 40 beats/min and higher then 120 beats/min. 
+hf_new <- c()
+time_new <- c()
+
+for (i in 1:length(hf)){
+  if ((hf[i] > 40) & (hf[i] <120)){
+   hf_new <- append(hf_new,hf[i])
+    time_new <- append(time_new,time[i])
+  } 
+}
+
+# Resample hf_new data
+xout <- seq(1,3600,1/32)
+approx <- approx(x = time_new, y = hf_new,xout=xout)
+time <- approx$x
+hf <- approx$y
+hf <- hf[1:(length(hf)-129)]
+
+# Load respiration data
+data <- scan('respiration.dat')
+data <- data[1:(length(data)-128)]
 ```
 
 `@sample_code`
@@ -355,17 +390,33 @@ How to calculate crosscorrelation
 correlation <- function(series1,series2,ts,fs) {
   # Calculate lenght 
   n1 <- length(series1)
-  n2 <- lenght(series2)
+  n2 <- length(series2)
   
   if (n1!=n2){
     stop("Series1 and series2 have unequal length!")
   }
   
+  # lenght of used data
+  n <- as.integer(n1-ts*fs)
+  if (ts >= 0){
+  	corr <- sum(series1[1:as.integer(n1-ts*fs)]*series2[as.integer(1+ts*fs):n1])/n
+  } else{
+    corr <- sum(series1[as.integer(1+abs(ts)*fs):n1]*series2[1:as.integer(n1-abs(ts)*fs)])/n
+  }
   # Calculate correlation of series1 and series2 with shift ts of series2
   
-  return(series1[1:(n1-ts*fs)],series2[ts*fs:n1])
-  
+  return(corr)
 }
+
+length(data)
+length(hf)
+
+corr <- c()
+corr_ts <- seq(-3,3,by=0.1)
+for (ts in corr_ts){
+	corr <- append(corr,correlation(data,hf,ts,32))
+}
+plot(corr_ts,corr)
 ```
 
 `@solution`
