@@ -252,7 +252,7 @@ plot(time,hf)
 
 ---
 
-## Respiration and Heart rate
+## Load and plot respiration data
 
 ```yaml
 type: NormalExercise
@@ -303,7 +303,12 @@ for (i in 1:length(hf)){
 data <- scan('respiration.dat')
 length(data)
 time_data <- seq(0,(3600-1/32),1/32)
-plot(time_data,data)
+
+plot(time_data,data,xlim=c(0,100),ylim=c(-100,100))
+
+
+
+
 
 
 ```
@@ -343,7 +348,24 @@ How to calculate crosscorrelation
 
 `@sample_code`
 ```{r}
-
+# create a correlation function for a defined timeshift ts in seconds
+# ts - timeshift
+# fs - sampling frequency (both the same)
+# series1 and series2 must have the same length
+correlation <- function(series1,series2,ts,fs) {
+  # Calculate lenght 
+  n1 <- length(series1)
+  n2 <- lenght(series2)
+  
+  if (n1!=n2){
+    stop("Series1 and series2 have unequal length!")
+  }
+  
+  # Calculate correlation of series1 and series2 with shift ts of series2
+  
+  return(series1[1:(n1-ts*fs)],series2[ts*fs:n1])
+  
+}
 ```
 
 `@solution`
