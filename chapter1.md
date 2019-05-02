@@ -399,13 +399,18 @@ key: 4fec7988a8
 xp: 100
 ```
 
+Now we check out the other data set. The **respiration signal** comes from thorax belt which measure the extension of the chest. It has a **sampling rate of 32 Hz**
 
 
 `@instructions`
-
+1. Load the data from ```respiration.dat``` to ```data```
+2. Create a time series fitting to ```data``` and store it in ```time_data```
+3. Plot the first 100 seconds of the data, by using the argument ```xlim``` of plot.
 
 `@hint`
-
+- Do you remember ```seq(from=,to=,by=)```? 
+- You have different lengths? So maybe you have to reduce your time series by one?
+- You have already a time series in seconds in ```time_data```, so ```ylim``` is also in seconds!
 
 `@pre_exercise_code`
 ```{r}
@@ -422,12 +427,6 @@ time_data <-
 
 # Plot the first 100 seconds (replace ___)
 plot(x=___ ,y=___, xlim=c(___,___), ylim=c(-100,100))
-
-
-
-
-
-
 ```
 
 `@solution`
@@ -439,37 +438,30 @@ data <- scan('respiration.dat')
 time_data <- seq(0,length(data)/32-1/32,1/32)
 
 # Plot the first 100 seconds 
-plot(x=time_data ,y=data, xlim=c(0,100), ylim=c(-100,100))
+plot(x=time_data, y=data, xlim=c(0,100), ylim=c(-100,100))
 ```
 
 `@sct`
 ```{r}
 ex() %>% check_function("scan") %>% check_arg("file") %>% check_equal()
+ex() %>% check_object("data") %>% check_equal()
 
 ex() %>% check_function("seq") %>% {
   check_arg(.,"from")%>% check_equal()
   check_arg(.,"to")%>% check_equal()
   check_arg(.,"by")%>% check_equal()
 } %>% check_equal()
-ex() %>% check_object("time_rs") %>% check_equal()
-
-ex() %>% check_function("approx") %>% {
-  check_arg(.,"x")%>% check_equal()
-  check_arg(.,"y")%>% check_equal()
-  check_arg(.,"xout")%>% check_equal()
-} %>% check_equal()
-ex() %>% check_object("signal_approx") %>% check_equal()
-
-ex() %>% check_object("hf_rs") %>% check_equal()
+ex() %>% check_object("time_data") %>% check_equal()
 
 ex() %>% check_function("plot") %>% {
   check_arg(.,"x") %>% check_equal()
   check_arg(.,"y") %>% check_equal()
   check_arg(.,"xlim") %>% check_equal()
-} #%>% check_equal()
+} %>% check_equal()
 
 ex() %>% check_error()
-success_msg("Well resampled!")
+
+success_msg("Awwsome!")
 ```
 
 ---
