@@ -11,7 +11,7 @@ key: ecd209faa9
 xp: 100
 ```
 
-In the second part of this workshop we will search for pattern in our RRI signal. 
+In the second part of this workshop we will search for pattern in our RRI signal.
 
 `@instructions`
 1. Load the
@@ -68,7 +68,7 @@ key: fd2af61423
 xp: 100
 ```
 
-Now we want to find anchor points in the resampled RRI signal, which is still available under ```rri_rs``` and ```time_rs```. 
+Now we want to find anchor points in the resampled RRI signal, which is still available under ```rri_rs``` and ```time_rs```.
 
 `@instructions`
 
