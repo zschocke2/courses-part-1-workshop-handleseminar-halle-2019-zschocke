@@ -410,40 +410,18 @@ xp: 100
 `@pre_exercise_code`
 ```{r}
 download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/f2663aa0a45d1bce64f9bbb6c8eb733aabbaca9e/SL196_thorax.txt',destfile='respiration.dat')
-download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
-
-# Load data
-data <- scan('data.rri')/256
-
-# Calculate RRI
-rri <- diff(data)
-
-# Calculate time
-time <- data[1:(length(data)-1)]
-
-# Calculate heart rate in beats per minute
-hf <- 60/rri
-
-# Delete all entries lower then 40 beats/min and higher then 120 beats/min. 
-hf_new <- c()
-time_new <- c()
-
-for (i in 1:length(hf)){
-  if ((hf[i] > 40) & (hf[i] <120)){
-   hf_new <- append(hf_new,hf[i])
-    time_new <- append(time_new,time[i])
-  } 
-}
 ```
 
 `@sample_code`
 ```{r}
 # Load respiration data
 data <- scan('respiration.dat')
-length(data)
-time_data <- seq(0,(3600-1/32),1/32)
 
-plot(time_data,data,xlim=c(0,100),ylim=c(-100,100))
+# Create time series
+time_data <- ___
+
+# Plot the first 100 seconds 
+plot(x=time_data ,y=data, xlim=c(0,100), ylim=c(-100,100))
 
 
 
@@ -454,7 +432,14 @@ plot(time_data,data,xlim=c(0,100),ylim=c(-100,100))
 
 `@solution`
 ```{r}
+# Load respiration data
+data <- scan('respiration.dat')
 
+# Create time series
+time_data <- seq(0,length(data)/32-1/32,1/32)
+
+# Plot the first 100 seconds 
+plot(x=time_data ,y=data, xlim=c(0,100), ylim=c(-100,100))
 ```
 
 `@sct`
