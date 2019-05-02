@@ -234,6 +234,7 @@ for (i in 1:length(hf)){
   } 
 }
 
+# Plot data
 plot(time_new[1:100],hf_new[1:100])
 ```
 
@@ -321,10 +322,11 @@ hf <- 60/rri
 hf_new <- c()
 time_new <- c()
 
+# Define for-loop for all hear rates 
 for (i in 1:length(hf)){
   if ((hf[i] > 40) & (hf[i] <120)){
    hf_new <- append(hf_new,hf[i])
-    time_new <- append(time_new,time[i])
+   time_new <- append(time_new,time[i])
   } 
 }
 
@@ -354,34 +356,34 @@ time_rs <- seq(0,3600,1/32)
 signal_approx <- approx(x = time_new, y = hf_new, xout=time_rs)
 
 # Read the resampled signal from the nested list signal_approx
-hf_rs <- approx$y
+hf_rs <- signal_approx$y
 
 # Plot the new data
-plot(time,hf)
+plot(time_rs,hf_rs)
 ```
 
 `@sct`
 ```{r}
 ex() %>% check_function("seq") %>% {
-  check_arg(.,"from")
-  check_arg(.,"to")
-  check_arg(.,"by")
+  check_arg(.,"from")%>% check_equal()
+  check_arg(.,"to")%>% check_equal()
+  check_arg(.,"by")%>% check_equal()
 } %>% check_equal()
 ex() %>% check_object("time_rs") %>% check_equal()
 
 ex() %>% check_function("approx") %>% {
-  check_arg(.,"x")
-  check_arg(.,"y")
-  check_arg(.,"xout")
-}
+  check_arg(.,"x")%>% check_equal()
+  check_arg(.,"y")%>% check_equal()
+  check_arg(.,"xout")%>% check_equal()
+} %>% check_equal()
 ex() %>% check_object("signal_approx") %>% check_equal()
 
 ex() %>% check_object("hf_rs") %>% check_equal()
 
 ex() %>% check_function("plot") %>% {
-  check_arg(.,"x")
-  check_arg(.,"y")
-} %>% check_equal()
+  check_arg(.,"x") %>% check_equal()
+  check_arg(.,"y") %>% check_equal()
+} #%>% check_equal()
 
 ex() %>% check_error()
 success_msg("Well resampled!")
