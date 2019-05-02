@@ -476,7 +476,7 @@ xp: 100
 Finally we have a resampled series of the heart rate and we have the respiration. Both signals come from different devices which are not perfect synchronized. Now we have to find out the time difference between both time series. We can do this by cross-correlation (basicly the same as an auto-correlation)! The signal has still **sampling rate of 32 Hz**
 
 `@instructions`
-We have already created a correlation function ```correlation(series1,series2,tau)```. 
+We have already created a correlation function ```correlation(series1,series2,tau)```. The heart rate is sill stored in ```hf``` and the respiration signal in ```resp```.
 1. Create an empty vector ```corr```.
 2. Calculate the correlation values for tau from -2 seconds to +2 seconds. (But for the loop you need the sampling units!) Use the heart rate as ```series1```.
 3. Create the time series ```corr_time``` from -2 to 2 seconds with the sampling rate of 32 Hz.
@@ -540,8 +540,8 @@ hf <- approx$y
 hf <- hf[1:(length(hf)-129)]
 
 # Load respiration data
-data <- scan('respiration.dat')
-data <- data[1:(length(data)-128)]
+resp <- scan('respiration.dat')
+resp <- resp[1:(length(data)-128)]
 ```
 
 `@sample_code`
@@ -555,14 +555,26 @@ for (___ in ___:___){
 }
 
 # Create a time series for the correlation values
-corr_time <- seq(-2,2,1/32)
+corr_time <- 
 
 # Plot the correlation
-plot(corr_time,corr)
+
 ```
 
 `@solution`
 ```{r}
+# Create an empty vector corr
+corr <- c()
+
+# Calculate the correlation from -2 to 2 seconds and append the value to corr (replace ___)
+for (___ in ___:___){
+	corr <- append(corr,correlation(___,___,___))
+}
+
+# Create a time series for the correlation values
+corr_time <- 
+
+# Plot the correlation
 
 ```
 
