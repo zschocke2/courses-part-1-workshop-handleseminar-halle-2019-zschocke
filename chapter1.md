@@ -332,15 +332,16 @@ for (i in 1:length(hf)){
 
 `@sample_code`
 ```{r}
+# Create time series from 0 to 3600 seconds, with a sampling rate of 32 Hz
+time_rs <-
 
-# Resample hf_new data
-time_rs <- seq(0,3600,1/32)
-approx <- approx(x = time_new, y = hf_new,xout=time_rs)
-time_rs <- approx$x
-hf_rs <- approx$y
+# Use the approx() function to resample hf_new
+signal_approx <- 
 
-plot(time,hf)
+# Read the resampled signal from the nested list signal_approx
+hf_rs <- 
 
+# Plot the new data
 
 ```
 
@@ -349,17 +350,41 @@ plot(time,hf)
 # Create time series from 0 to 3600 seconds, with a sampling rate of 32 Hz
 time_rs <- seq(0,3600,1/32)
 
-# 
-approx <- approx(x = time_new, y = hf_new, xout=time_rs)
-time_rs <- approx$x
+# Use the approx() function to resample hf_new
+signal_approx <- approx(x = time_new, y = hf_new, xout=time_rs)
+
+# Read the resampled signal from the nested list signal_approx
 hf_rs <- approx$y
 
+# Plot the new data
 plot(time,hf)
 ```
 
 `@sct`
 ```{r}
+ex() %>% check_function("seq") %>% {
+  check_arg(.,"from")
+  check_arg(.,"to")
+  check_arg(.,"by")
+} %>% check_equal()
+ex() %>% check_object("time_rs") %>% check_equal()
 
+ex() %>% check_function("approx") %>% {
+  check_arg(.,"x")
+  check_arg(.,"y")
+  check_arg(.,"xout")
+}
+ex() %>% check_object("signal_approx") %>% check_equal()
+
+ex() %>% check_object("hf") %>% check_equal()
+
+ex() %>% check_function("plot") %>% {
+  check_arg(.,"x")
+  check_arg(.,"y")
+} %>% check_equal()
+
+ex() %>% check_error()
+success_msg("Nice!")
 ```
 
 ---
