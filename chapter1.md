@@ -290,7 +290,6 @@ Thats why we need to resample our filtered heart rate signal ```hf_new``` to equ
 
 Here we will use a linear interpolation from the function ```approx(x=,y=,xout=)```. ```x```and ```y``` are the values of the signal, while ```xout``` contains the x-valuse we want to interpolate.
 
-
 `@instructions`
 Your filtered data, which you have to use in the following exercises are still availabel under ```hf_new``` and ```time_new```.
 
