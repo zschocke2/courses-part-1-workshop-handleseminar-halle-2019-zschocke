@@ -376,7 +376,7 @@ ex() %>% check_function("approx") %>% {
 }
 ex() %>% check_object("signal_approx") %>% check_equal()
 
-ex() %>% check_object("hf") %>% check_equal()
+ex() %>% check_object("hf_rs") %>% check_equal()
 
 ex() %>% check_function("plot") %>% {
   check_arg(.,"x")
@@ -384,7 +384,7 @@ ex() %>% check_function("plot") %>% {
 } %>% check_equal()
 
 ex() %>% check_error()
-success_msg("Nice!")
+success_msg("Well resampled!")
 ```
 
 ---
