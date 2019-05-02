@@ -95,3 +95,46 @@ Now we want to find anchor points in the resampled RRI signal, which is still av
 ```{r}
 
 ```
+
+---
+
+## Insert exercise title here
+
+```yaml
+type: NormalExercise
+key: cc320eca75
+xp: 100
+```
+
+
+
+`@instructions`
+
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+
+```
+
+`@sample_code`
+```{r}
+"Hello, world!"
+```
+
+`@solution`
+```{r}
+# Example 2:
+"Hello, world!"
+
+```
+
+`@sct`
+```{r}
+
+# SCT, robust to small typos
+ex() %>% check_code("[H|h]ello,*\\s*[W|w]orld!")
+
+```

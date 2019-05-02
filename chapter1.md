@@ -161,13 +161,29 @@ key: 5f3db91f6e
 xp: 100
 ```
 
-Unrealisic heart frequence during sleep lower 40 higher 120 beats/min
+As we could see in the previous results some heart frequencies are not as expected. During sleep the heart rate should be between 40 and 120 beats/min*. All others are artefacts and should be removed.
+
+
+*for this specific case
 
 `@instructions`
-
+```time``` and ```hf``` are still available.
+1. First create 2 empty vectors ```time_new``` and ```hf_new``` by using ```c()```.
+2. Create a for-loop, which loops over all heart rates. Use ```i``` as loop variable
+3. Use as if-control to select frequencies between 40 and 120 beats/minute and append this values to ```hf_new```, also append the timestamp to ```time_new```. To append use ```new <- append(new, value)``` - it appends ```value``` to ```new```
+4. Plot the filtered data.
 
 `@hint`
-
+- for loop has the structur:
+	for (i in 1:1000){
+    	INNER PART OF THE LOOP
+    }
+- if :
+	if(CONDITION){
+    	WHAT TO DO IF CONDITION IF FULFILED
+    }
+- with & you can combine conditions as logical AND
+- with | you can combine conditions as logical OR
 
 `@pre_exercise_code`
 ```{r}
@@ -189,28 +205,74 @@ hf <- 60/rri
 
 `@sample_code`
 ```{r}
-# Delete all entries lower then 40 beats/min and higher then 120 beats/min. 
+# Create hf_new and time_new as emtpy vectors
+hf_new <- ___
+time_new <- ___
+
+# Define for-loop for all hear rates 
+
+
+
+
+
+
+
+# Plot data 
+```
+
+`@solution`
+```{r}
+# Create hf_new and time_new as emtpy vectors
 hf_new <- c()
 time_new <- c()
 
+# Define for-loop for all hear rates 
 for (i in 1:length(hf)){
   if ((hf[i] > 40) & (hf[i] <120)){
    hf_new <- append(hf_new,hf[i])
-    time_new <- append(time_new,time[i])
+   time_new <- append(time_new,time[i])
   } 
 }
 
 plot(time_new[1:100],hf_new[1:100])
 ```
 
-`@solution`
-```{r}
-
-```
-
 `@sct`
 ```{r}
+ex() %>% check_code("c()",times=2,fixed=TRUE)
 
+ex() %>% check_for() %>% {
+  check_cond(.) %>% {
+    check_code(., "in")
+    check_code(., "1")
+    check_code(., c("length(hf)","length(time)","3615"),fixed=TRUE)
+  }
+  check_body(.) %>% {
+    check_if_else(.) %>%  {
+      check_cond(.) %>% {
+        check_code(., c("hf[i]"),fixed=TRUE,times=2)
+        check_code(.,c(">","<"),fixed=TRUE)
+        check_code(.,c("40"),fixed=TRUE)   
+        check_code(.,c(">","<"),fixed=TRUE)
+        check_code(.,c("120"),fixed=TRUE)   
+        check_code(.,"&")
+      }
+    check_if(.) %>% {
+        check_code(., c("append("),fixed=TRUE,times=2)
+        check_code(.,c("<-","=",times=2),fixed=TRUE)
+      	check_code(.,"hf_new",times=2,fixed=TRUE)
+      	check_code(.,"time_new",times=2,fixed=TRUE)
+      	check_code(.,"hf[i]",fixed=TRUE)
+        check_code(.,"time[i]",fixed=TRUE)   
+    }
+  }
+    
+ }
+}
+ex() %>% check_object("hf_new") %>% check_equal()
+ex() %>% check_object("time_new") %>% check_equal()
+ex() %>% check_error()
+success_msg("Nice!")
 ```
 
 ---
