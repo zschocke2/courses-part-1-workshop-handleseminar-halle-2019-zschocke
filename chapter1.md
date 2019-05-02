@@ -285,15 +285,19 @@ key: d276edac58
 xp: 100
 ```
 
-In the next step we want to compare RRI and resample heart rate data from RRI (to obtain sampling rate as respiration signal)
+In the following task we want to compare heart rate and respiration. To compare both signals, we need the same sampling rate for both, with equidistant time steps.
+Thats why we need to resample our filtered heart rate signal ```hf_new``` to equidistant time steps and the same frequency as the respiration signal, 32 Hz.
 
-approx(x,y,xout)
-x - x values
-y - values
-xout - series of new datapoints
+Here we will use a linear interpolation from the function ```approx(x=,y=,xout=)```. ```x```and ```y``` are the values of the signal, while ```xout``` contains the x-valuse we want to interpolate.
+
 
 `@instructions`
+Your filtered data, which you have to use in the following exercises are still availabel under ```hf_new``` and ```time_new```.
 
+1. Create a time series from 0 to 3600 seconds with a sampling rate of 32 Hz. Store it to ```time_rs``` (rs = resampled)
+2. Use the ```approx()``` function to create a resampled signal! Store it to ```signal_approx```.
+3. ```approx()``` will return a nested list. To access the new hf-values, you have to use ```signal_approx$y```. Store it to ```hf_rs```.
+4. Plot the resampled data.
 
 `@hint`
 
@@ -329,21 +333,29 @@ for (i in 1:length(hf)){
 
 `@sample_code`
 ```{r}
+
 # Resample hf_new data
-xout <- seq(0,3600,1/32)
-approx <- approx(x = time_new, y = hf_new,xout=xout)
-time <- approx$x
-hf <- approx$y
+time_rs <- seq(0,3600,1/32)
+approx <- approx(x = time_new, y = hf_new,xout=time_rs)
+time_rs <- approx$x
+hf_rs <- approx$y
 
 plot(time,hf)
-
 
 
 ```
 
 `@solution`
 ```{r}
+# Create time series from 0 to 3600 seconds, with a sampling rate of 32 Hz
+time_rs <- seq(0,3600,1/32)
 
+# 
+approx <- approx(x = time_new, y = hf_new, xout=time_rs)
+time_rs <- approx$x
+hf_rs <- approx$y
+
+plot(time,hf)
 ```
 
 `@sct`
