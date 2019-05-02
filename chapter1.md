@@ -401,7 +401,6 @@ xp: 100
 
 Now we check out the other data set. The **respiration signal** comes from thorax belt which measure the extension of the chest. It has a **sampling rate of 32 Hz**
 
-
 `@instructions`
 1. Load the data from ```respiration.dat``` to ```data```
 2. Create a time series fitting to ```data``` and store it in ```time_data```
@@ -475,7 +474,6 @@ xp: 100
 ```
 
 Finally we have a resampled series of the heart rate and we have the respiration. Both signals come from different devices which are not perfect synchronized. Now we have to find out the time difference between both time series. We can do this by cross-correlation (basicly the same as an auto-correlation)!
-
 
 `@instructions`
 
