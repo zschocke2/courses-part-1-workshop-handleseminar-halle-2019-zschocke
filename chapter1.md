@@ -474,7 +474,8 @@ key: 678902c4d8
 xp: 100
 ```
 
-How to calculate crosscorrelation
+Finally we have a resampled series of the heart rate and we have the respiration. Both signals come from different devices which are not perfect synchronized. Now we have to find out the time difference between both time series. We can do this by cross-correlation (basicly the same as an auto-correlation)!
+
 
 `@instructions`
 
