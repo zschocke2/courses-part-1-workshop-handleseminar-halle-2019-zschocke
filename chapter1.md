@@ -18,17 +18,19 @@ In our second workshop we will have a look on R-peaks and respiration data.
 
 But let's simply start with R-peaks, R-peaks are derived from ECGs and describes the point of the main heart contraction. Here we use a dataset of 36 000 heart beats from a signle night of a random subject in the sleep laboratories of Charité Berlin. 
 
-First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to devide each point by the sampling rate to obtain the time in seconds.
+First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to divide each point by the sampling rate to obtain the time in seconds.
 Furthermore we can calculate the heart rate as the reciprocal of the R-R distance called RR-interval (RRI).
 
 `@instructions`
 1. Load data and Convert R-peak-points into time in seconds (in one line)
-2. Calculate the RR-intervals. Use ```diff()```
+2. Calculate the RR-intervals and save it to ```rri```. Use ```diff()```!
+3. Create a ```time```, a list which contains the timestamps of each RRI. (Check length of ```rri``` and ```time```, they should be the same)
 
 `@hint`
 - Do you remember the function ```scan()``` to load data?
 - You can divide a whole list by a divisor to divide each element of the list!
--
+- ```diff``` will reduce the data by one (because you calculated intervals)
+- ```plot(x,y)```
 
 `@pre_exercise_code`
 ```{r}
@@ -47,7 +49,7 @@ rri <- ___
 # Calculate timestamps
 time <- ___
              
-# Plot
+# Plot RRI
 
 ```
 
@@ -62,13 +64,26 @@ rri <- diff(data)
 # Calculate timestamps
 time <- data[1:length(data)-1]
              
-# Plot
+# Plot RRI
 plot(time,rri)
 ```
 
 `@sct`
 ```{r}
+ex() %>% check_function("scan") %>% check_arg("file") %>% check_equal()
+ex() %>% check_object("data") %>% check_equal()
 
+ex() %>% check_function("diff") %>% check_arg("x") %>% check_equal()
+ex() %>% check_object("time") %>% check_equal()
+
+
+ex() %>% check_function("plot") %>% {
+  check_arg(.,"x")
+  check_arg(.,"y")
+} %>% check_equal()
+
+ex() %>% check_error()
+success_msg("Perfect!")
 ```
 
 ---
@@ -81,10 +96,12 @@ key: e8803cd778
 xp: 100
 ```
 
-Calculate heart rate from RRI
+Now we will transform our RRI to a heart rate. The heart rate or the heart frequency is the reciproke of the RRI but in units of beats per minute.
 
 `@instructions`
-
+The RRIs are still available under ```rri```.
+1. Calculate the heart rate in beats per minute.
+2. Plot the heart rate against the time, ```time``` is still available.
 
 `@hint`
 
@@ -106,20 +123,32 @@ time <- data[1:(length(data)-1)]
 `@sample_code`
 ```{r}
 # Calculate heart rate in beats per minute
+hf <- ___
+
+# plot heart rate
+___
+```
+
+`@solution`
+```{r}
+# Calculate heart rate in beats per minute
 hf <- 60/rri
 
 # plot heart rate
 plot(time,hf)
 ```
 
-`@solution`
-```{r}
-
-```
-
 `@sct`
 ```{r}
+ex() %>% check_object("hf") %>% check_equal()
 
+ex() %>% check_function("plot") %>% {
+  check_arg(.,"x")
+  check_arg(.,"y")
+} %>% check_equal()
+
+ex() %>% check_error()
+success_msg("Nice!")
 ```
 
 ---
