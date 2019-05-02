@@ -415,13 +415,13 @@ download.file(url='https://assets.datacamp.com/production/repositories/4882/data
 `@sample_code`
 ```{r}
 # Load respiration data
-data <- scan('respiration.dat')
+data <- 
 
 # Create time series
-time_data <- ___
+time_data <- 
 
-# Plot the first 100 seconds 
-plot(x=time_data ,y=data, xlim=c(0,100), ylim=c(-100,100))
+# Plot the first 100 seconds (replace ___)
+plot(x=___ ,y=___, xlim=c(___,___), ylim=c(-100,100))
 
 
 
@@ -444,7 +444,31 @@ plot(x=time_data ,y=data, xlim=c(0,100), ylim=c(-100,100))
 
 `@sct`
 ```{r}
+ex() %>% check_function("scan") %>% check_arg("file") %>% check_equal()
 
+ex() %>% check_function("seq") %>% {
+  check_arg(.,"from")%>% check_equal()
+  check_arg(.,"to")%>% check_equal()
+  check_arg(.,"by")%>% check_equal()
+} %>% check_equal()
+ex() %>% check_object("time_rs") %>% check_equal()
+
+ex() %>% check_function("approx") %>% {
+  check_arg(.,"x")%>% check_equal()
+  check_arg(.,"y")%>% check_equal()
+  check_arg(.,"xout")%>% check_equal()
+} %>% check_equal()
+ex() %>% check_object("signal_approx") %>% check_equal()
+
+ex() %>% check_object("hf_rs") %>% check_equal()
+
+ex() %>% check_function("plot") %>% {
+  check_arg(.,"x") %>% check_equal()
+  check_arg(.,"y") %>% check_equal()
+} #%>% check_equal()
+
+ex() %>% check_error()
+success_msg("Well resampled!")
 ```
 
 ---
