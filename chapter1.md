@@ -499,7 +499,6 @@ correlation <- function(series1,series2,tau) {
   corr <- 0
   # Calculate 
   if (tau >= 0){
-    print(series2)
     corr <- sum(series2[1:(n1-tau)]*series1[(1+tau):n1])/(n1-tau)
   } else{
     corr <- sum(series2[(1-tau):n1]*series1[1:(n1+tau)])/(n1-tau)
@@ -551,8 +550,8 @@ resp <- resp[1:(length(resp)-128)]
 corr <- c()
 
 # Calculate the correlation from -2 to 2 seconds and append the value to corr (replace ___)
-for (___ in ___:___){
-	corr <- append(corr,correlation(___,___,___))
+for (t in ___:___){
+	corr <- append(corr,correlation(___,___,t))
 }
 
 # Create a time series for the correlation values
@@ -568,8 +567,7 @@ corr_time <-
 corr <- c()
 
 # Calculate the correlation from -2 to 2 seconds and append the value to corr (replace ___)
-correlation(hf,resp,0)
-for (t in 1:64){
+for (t in -64:64){
 	corr <- append(corr,correlation(hf,resp,t))
 }
 
@@ -582,7 +580,35 @@ plot(corr_time,corr)
 
 `@sct`
 ```{r}
+ex() %>% check_object("corr") %>% check_equal(incorrect_msg="Did you create an empty array? And did you use hf as series1?")
 
+ex() %>% check_for() %>% {
+  check_cond(.) %>% {
+    check_code(., "-64")
+    check_code(., "64")
+  }
+  check_body(.)  %>% check_function("correlation") %>% {
+     check_arg(.,"series1") %>% check_equal()
+     check_arg(.,"series2") %>% check_equal()
+  } %>% check_equal()
+}
+
+ex() %>% check_function("seq") %>%{
+  check_arg(.,"from") %>% check_equal()
+  check_arg(.,"to") %>% check_equal()
+  check_arg(.,"by") %>% check_equal()
+}
+
+
+ex() %>% check_function("plot") %>% {
+  check_arg(.,"x") %>% check_equal()
+  check_arg(.,"y") %>% check_equal()
+} %>% check_equal()
+
+
+ex() %>% check_error()
+
+success_msg("Awwsome!")
 ```
 
 ---
