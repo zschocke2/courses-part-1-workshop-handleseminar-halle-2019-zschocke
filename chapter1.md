@@ -160,26 +160,26 @@ key: 5f3db91f6e
 xp: 100
 ```
 
-As we could see in the previous results some heart frequencies are not as expected. During sleep the heart rate should be between 40 and 120 beats/min*. All others are artefacts and should be removed.
+As we could see in the previous results some heart frequencies are not as expected. During sleep the heart rate should be between 40 and 120 beats/min*. All others are artifacts and should be removed.
 
 
 *for this specific case
 
 `@instructions`
 ```time``` and ```hf``` are still available.
-1. First create 2 empty vectors ```time_new``` and ```hf_new``` by using ```c()```.
-2. Create a for-loop, which loops over all heart rates. Use ```i``` as loop variable
-3. Use as if-control to select frequencies between 40 and 120 beats/minute and append this values to ```hf_new```, also append the timestamp to ```time_new```. To append use ```new <- append(new, value)``` - it appends ```value``` to ```new```
+1. First create two empty vectors ```time_new``` and ```hf_new``` by using ```c()``` (without any arguments).
+2. Set up a ```for``` loop, which loops over all heart rates. Use ```i``` as loop variable.
+3. Use ```if``` control to select frequencies between 40 and 120 beats/minute and append this values to ```hf_new```, also append the timestamp to ```time_new```. To append use ```new <- append(new, value)``` - it appends ```value``` to ```new```
 4. Plot the filtered data.
 
 `@hint`
-- for loop has the structur:
+- for loop has the structure:
 	for (i in 1:1000){
     	INNER PART OF THE LOOP
     }
 - if :
 	if(CONDITION){
-    	WHAT TO DO IF CONDITION IF FULFILED
+    	WHAT TO DO IF CONDITION IF FULFILLED
     }
 - with & you can combine conditions as logical AND
 - with | you can combine conditions as logical OR
@@ -208,15 +208,11 @@ hf <- 60/rri
 hf_new <- ___
 time_new <- ___
 
-# Define for-loop for all hear rates 
-
-
-
-
-
+# Define for loop for all hear rates 
 
 
 # Plot data 
+
 ```
 
 `@solution`
