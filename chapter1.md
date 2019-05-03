@@ -496,10 +496,11 @@ correlation <- function(series1,series2,tau) {
   if (n1!=n2){
     stop("Series1 and series2 have unequal length!")
   }
-  
+  corr <- 0
   # Calculate 
-  if (ts >= 0){
-  	corr <- sum(series2[1:(n1-tau)]*series1[(1+tau):n1])/(n1-tau)
+  if (tau >= 0){
+    print(series2)
+    corr <- sum(series2[1:(n1-tau)]*series1[(1+tau):n1])/(n1-tau)
   } else{
     corr <- sum(series2[(1-tau):n1]*series1[1:(n1+tau)])/(n1-tau)
   }
@@ -541,7 +542,7 @@ hf <- hf[1:(length(hf)-129)]
 
 # Load respiration data
 resp <- scan('respiration.dat')
-resp <- resp[1:(length(data)-128)]
+resp <- resp[1:(length(resp)-128)]
 ```
 
 `@sample_code`
@@ -567,15 +568,16 @@ corr_time <-
 corr <- c()
 
 # Calculate the correlation from -2 to 2 seconds and append the value to corr (replace ___)
-for (___ in ___:___){
-	corr <- append(corr,correlation(___,___,___))
+correlation(hf,resp,0)
+for (t in 1:64){
+	corr <- append(corr,correlation(hf,resp,t))
 }
 
 # Create a time series for the correlation values
-corr_time <- 
+corr_time <- seq(-2,2,1/32)
 
-# Plot the correlation
-
+# Plot the correlationplot
+plot(corr_time,corr)
 ```
 
 `@sct`
