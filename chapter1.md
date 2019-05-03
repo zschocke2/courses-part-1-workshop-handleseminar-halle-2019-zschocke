@@ -18,7 +18,7 @@ In our second workshop we will have a look at heartbeat intervals and respiratio
 
 R peaks are large spikes in the ECG that mark the occurrence of the main heart contraction. Here we use a dataset of 36 000 heart beats, i.e. the clock-times of each R peak, from a single subject, single night.
 
-First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to divide each point by the sampling rate to obtain the time in seconds. Furthermore we can calculate the heart rate as the reciprocal of the R-R distance called RR-interval (RRI).
+First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to divide each point by the sampling rate to obtain the time in seconds. 
 
 `@instructions`
 1. Load data from the file "data.rri" and convert R-peak points into time in seconds (in one line).
@@ -95,7 +95,7 @@ key: e8803cd778
 xp: 100
 ```
 
-Now we will transform our RRI to a heart rate. The heart rate or the heart frequency is the reciproke of the RRI but in units of beats per minute.
+Now we will transform our RRIs to heart rates. The heart rate or the heart frequency is the reciprocal of the RRI value but in units of beats per minute (not beats per second).
 
 `@instructions`
 The RRIs are still available under ```rri```.
