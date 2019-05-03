@@ -16,12 +16,12 @@ skills: 1
 
 In our second workshop we will have a look at heartbeat intervals and respiration data.
 
-R peaks are large spikes in the ECG that mark the occurrence of the main heart contraction. Here we use a dataset of 36 000 heart beats, i.e. the clock-times of each R peak, from a single subject, single night. 
+R peaks are large spikes in the ECG that mark the occurrence of the main heart contraction. Here we use a dataset of 36 000 heart beats, i.e. the clock-times of each R peak, from a single subject, single night.
 
 First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to divide each point by the sampling rate to obtain the time in seconds. Furthermore we can calculate the heart rate as the reciprocal of the R-R distance called RR-interval (RRI).
 
 `@instructions`
-1. Load data and convert R-peak points into time in seconds (in one line).
+1. Load data from the file "data.rri" and convert R-peak points into time in seconds (in one line).
 2. Calculate the RR intervals and save them to ```rri```. Use ```diff()```!
 3. Create a ```time```, a list which contains the timestamps of each RRI. (Check length of ```rri``` and ```time```; they should be the same)
 
