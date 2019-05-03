@@ -23,7 +23,7 @@ First the R-peaks are stored in sampling units of ```256 Hz```, which means we h
 `@instructions`
 1. Load data from the file "data.rri" and convert R-peak points into time in seconds (in one line).
 2. Calculate the RR intervals and save them to ```rri```. Use ```diff()```!
-3. Create a ```time```, a list which contains the timestamps of each RRI. (Check length of ```rri``` and ```time```; they should be the same)
+3. Create a ```time```, a list which contains the timestamps of each RRI, directly taken from ```data```. (Check length of ```rri``` and ```time```; they should be the same)
 
 `@hint`
 - Do you remember the function ```scan()``` to load data?
