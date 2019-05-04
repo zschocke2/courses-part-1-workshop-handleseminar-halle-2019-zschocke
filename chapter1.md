@@ -460,6 +460,98 @@ success_msg("Awwsome!")
 
 ---
 
+## Cross correlation function
+
+```yaml
+type: NormalExercise
+key: 111b254e59
+xp: 100
+```
+
+Finally we have a resampled series of the heart rate and we have the respiration, both at 32 Hz sampling rate. Physiologically, the respiration is modulating the heart rate via the so-called **respiratory sinus arrhythmia**. We want to answer two questions:
+
+(a) How strong is the respiratory sinus arrhythmia is this subject?  While the strength depends on the respiratory frequency, it can also be considered as a marker of cardiovascular health.
+
+(b) Is there a characteristic time delay associated with the respiratory sinus arrhythmia?  I.e., do the peaks in heart rate coincide with the peaks in the respiration signal or are they typically shifted by a small amount of time, either backwards or forwards in time?
+
+To address both questions, we have to calculate the cross correlation function between both time series.
+
+`@instructions`
+We have to set up a function called ```cross_correlation```. Its parameters are the two time series and the time delay tau that we want to look at.  Please complete the function definition.
+1. Both time series must have equal length. An error message should be printed if the lengths are unequal (```!=```). 
+2. Another error message should be printed if the time delay exceeds half the length of the time series, since there would be insufficient statistics in such cases.
+3. The average values (means) of both time series must be calculated and then be subtracted from the data. The function ```mean(series)``` can be used for this purpose.
+4. The actual cross correlation is defined as the mean product of ```series1[i]``` times ```series2[i+tau]```. Take care that the mean includes only terms with indices ```i``` and ```i+tau``` that are within the defined range of the series, i.e. between 1 and the length. This can be implemented more easily, if the case of negative tau is considered separately.
+
+`@hint`
+Remember length() for n1 and n2. If tau is positive, the mean for calculating the cross correlation can begin with series1[1], but must end before series1[n1], since series2[n1+tau] does not exist. The last existing series2[i+tau] is for i=n1-tau.
+
+`@pre_exercise_code`
+```{r}
+# create a correlation function for a defined timeshift tau in seconds
+___ <- function(___,___,___) {
+  # Calculate length 
+  n1 <- ___
+  n2 <- ___
+  if (___){
+    stop("Series1 and series2 have unequal length!")
+  }
+  if (___){
+    stop("The value of tau exceeds half of the length of the series!")
+  }
+  # Calculate and subtract the means
+  series1_detr = ___
+  series2_detr = ___
+  # Calculate 
+  if (tau >= 0){
+    corr <- mean(series2_detr[___:___]*series1_detr[___:___])
+  } else{
+    corr <- mean(series2_detr[___:___]*series1_detr[___:___])
+  }
+  return(corr)
+}
+
+```
+
+`@sample_code`
+```{r}
+
+```
+
+`@solution`
+```{r}
+# create a correlation function for a defined timeshift tau in seconds
+cross_correlation <- function(series1,series2,tau) {
+  # Calculate length 
+  n1 <- length(series1)
+  n2 <- length(series2)
+  if (n1 != n2){
+    stop("Series1 and series2 have unequal length!")
+  }
+  if (tau > n1/2){
+    stop("The value of tau exceeds half of the length of the series!")
+  }
+  # Calculate and subtract means
+  series1_detr = series1 - mean(series1)
+  series2_detr = series2 - mean(series2)
+  # Calculate 
+  if (tau >= 0){
+    corr <- mean(series1_detr[1:(n1-tau)]*series2_detr[(1+tau):n1])
+  } else{
+    corr <- mean(series1_detr[(1-tau):n1]*series2_detr[1:(n1+tau)])
+  }
+  return(corr)
+}
+
+```
+
+`@sct`
+```{r}
+
+```
+
+---
+
 ## Synchronisation via Crosscorrelation
 
 ```yaml
@@ -468,7 +560,13 @@ key: 678902c4d8
 xp: 100
 ```
 
-Finally we have a resampled series of the heart rate and we have the respiration. Both signals come from different devices which are not perfect synchronized. Now we have to find out the time difference between both time series. We can do this by cross-correlation (basicly the same as an auto-correlation)! The signal has still **sampling rate of 32 Hz**
+Finally we have a resampled series of the heart rate and we have the respiration, both at 32 Hz sampling rate. Physiologically, the respiration is modulating the heart rate via the so-called **respiratory sinus arrhythmia**. We want to answer two questions:
+
+(a) How strong is the respiratory sinus arrhythmia is this subject?  While the strength depends on the respiratory frequency, it can also be considered as a marker of cardiovascular health.
+
+(b) Is there a characteristic time delay associated with the respiratory sinus arrhythmia?  I.e., do the peaks in heart rate coincide with the peaks in the respiration signal or are they typically shifted by a small amount of time, either backwards or forwards in time?
+
+
 
 `@instructions`
 We have already created a correlation function ```correlation(series1,series2,tau)```. The heart rate is sill stored in ```hf``` and the respiration signal in ```resp```.
