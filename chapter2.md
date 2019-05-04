@@ -28,7 +28,6 @@ The row that must be appended is rri[(100-20):(100+19)].
 
 `@pre_exercise_code`
 ```{r}
-download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 
 ```
 
@@ -54,7 +53,7 @@ transpose(___)
 rri <- diff(scan('data.rri')/256)
 
 # Create matrix with one row of 40 zeros.
-mat <- matrix(rep(0,40), 1)
+mat <- matrix(rep(0,40), 1, 40)
 
 # Append another row, which is a copy of the RR interval series around the element with index 100.
 mat <- rbind(mat, rri[(100-20):(100+19)])
