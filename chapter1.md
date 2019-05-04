@@ -722,7 +722,7 @@ xp: 50
 Let's check the result from the last task again!
 ![](https://assets.datacamp.com/production/repositories/4882/datasets/19cb7f8ba735d63a8c65f4e3c23c6fb19e60534a/corr.png)
 
-So we moved shifted the heart rate again the respiration. What is the time shift between respiration signal and heart rate signal?
+So we shifted the respiratory signal with respect to the heart rate. What is the time shift between respiration signal and heart rate signal?
 
 `@hint`
 
