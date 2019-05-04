@@ -141,7 +141,7 @@ dim(mat)
 
 ---
 
-## Insert exercise title here
+## Calculate PRSA curve
 
 ```yaml
 type: NormalExercise
@@ -149,10 +149,13 @@ key: cc320eca75
 xp: 100
 ```
 
-
+The so-called PRSA curve is the average of all rows of our large matrix.  The DC value is defined as DC = -PRSA(-2) -PRSA(-1) +PRSA(0) +PRSA(1), where the argument indicates the position with respect to the anchor points.
 
 `@instructions`
-
+The matrix ```mat``` is still available from the previous exercise.  
+1. Calculate the average of all rows and plot this curve of 40 data points.
+2. Plot the PRSA curve.
+3. Calculate the DC value in milliseconds.
 
 `@hint`
 
@@ -164,20 +167,15 @@ xp: 100
 
 `@sample_code`
 ```{r}
-"Hello, world!"
+
 ```
 
 `@solution`
 ```{r}
-# Example 2:
-"Hello, world!"
 
 ```
 
 `@sct`
 ```{r}
-
-# SCT, robust to small typos
-ex() %>% check_code("[H|h]ello,*\\s*[W|w]orld!")
 
 ```
