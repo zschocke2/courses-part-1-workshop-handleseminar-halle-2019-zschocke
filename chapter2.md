@@ -153,12 +153,13 @@ The so-called PRSA curve is the average of all rows of our large matrix (except 
 
 `@instructions`
 The matrix ```mat``` is still available from the previous exercise.  
-1. Calculate the average of all rows and plot this curve of 40 data points.
-2. Plot the PRSA curve.
+1. Initialize ```PRSA``` as an empty vector.
+2. Calculate the average of each column of ```mat``` (excluding the first row) using a for loop and append these values to ```PRSA```.
+2. Plot the PRSA curve (of 40 data points).
 3. Calculate the DC value in milliseconds.
 
 `@hint`
-
+The columns of the matrix are given by mat[2:(dim(mat)[2]),j].
 
 `@pre_exercise_code`
 ```{r}
@@ -177,11 +178,42 @@ for (i in (21:(length(rri)-20)){
 
 `@sample_code`
 ```{r}
+# Initialize PRSA
+PRSA = ___
+
+# Loop over the 40 columns
+for (j in _:__){
+  PRSA <- append(___,mean(___,_]))
+}
+
+# Plot of the PRSA curve
+plot(seq(___,___,_), ___)
+
+# Calculate DC value
+DC <- -PRSA[__]-PRSA[__]+PRSA[__]-PRSA[__]
+
+# Output of DC in milliseconds
 
 ```
 
 `@solution`
 ```{r}
+# Initialize PRSA
+PRSA = c()
+
+# Loop over the 40 columns
+for (j in 1:40){
+  PRSA <- append(PRSA,mean(mat[2:(dim(mat)[2]),j]))
+}
+
+# Plot of the PRSA curve
+plot(seq(-20,19,1), PRSA)
+
+# Calculate DC value
+DC <- -PRSA[19]-PRSA[20]+PRSA[21]-PRSA[22]
+
+# Output of DC in milliseconds
+DC*1000
 
 ```
 
