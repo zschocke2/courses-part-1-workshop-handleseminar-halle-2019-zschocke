@@ -573,12 +573,11 @@ Therefore, we have to look at the cross correlation function for various time de
 `@instructions`
 Our cross correlation function ```cross_correlation(series1,series2,tau)``` is available. The heart rate is sill stored in ```hf``` and the respiration signal in ```resp```.
 1. Create an empty vector ```corr```.
-2. Calculate the correlation values for tau from -2 seconds to +2 seconds. But for the loop you need the sampling units -- remember the 32 Hz. Use the heart rate as ```series1```.
-3. Create the cross correlation function ```corr_time``` from -2 to 2 seconds with the sampling rate of 32 Hz.
+2. Calculate the correlation values for tau from -4 seconds to +4 seconds. But for the loop you need the sampling units -- remember the 32 Hz. Use the heart rate as ```series1```.
 3. Plot the cross correlation function; remember that you also need a time axis for that.
 
 `@hint`
-- You can create an empty vector by ```c()```
+Since the sampling rate is 32 Hz, -4 seconds corresponds to tau=-128, while +4 seconds corresponds to tau=+128.
 
 `@pre_exercise_code`
 ```{r}
@@ -666,12 +665,12 @@ corr_time <-
 corr <- c()
 
 # Calculate the cross ccorrelation from -2 to 2 seconds and append the value to corr (replace ___)
-for (tau in -64:64){
+for (tau in -128:128){
 	corr <- append(corr,cross_correlation(hf,resp,tau))
 }
 
 # Create a time axis for the cross correlation values
-corr_time <- seq(-2,2,1/32)
+corr_time <- seq(-4,4,1/32)
 
 # Plot the correlation
 plot(corr_time,corr)
