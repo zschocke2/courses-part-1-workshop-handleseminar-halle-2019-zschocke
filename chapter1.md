@@ -488,6 +488,11 @@ Remember length() for n1 and n2. If tau is positive, the mean for calculating th
 
 `@pre_exercise_code`
 ```{r}
+
+```
+
+`@sample_code`
+```{r}
 # create a correlation function for a defined timeshift tau in seconds
 ___ <- function(___,___,___) {
   # Calculate length 
@@ -510,11 +515,6 @@ ___ <- function(___,___,___) {
   }
   return(corr)
 }
-
-```
-
-`@sample_code`
-```{r}
 
 ```
 
