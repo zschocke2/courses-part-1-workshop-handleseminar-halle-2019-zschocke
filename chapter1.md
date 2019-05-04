@@ -682,8 +682,8 @@ ex() %>% check_object("corr") %>% check_equal(incorrect_msg="Did you create an e
 
 ex() %>% check_for() %>% {
   check_cond(.) %>% {
-    check_code(., "-64")
-    check_code(., "64")
+    check_code(., "-128")
+    check_code(., "128")
   }
   check_body(.)  %>% check_function("correlation") %>% {
      check_arg(.,"series1") %>% check_equal()
