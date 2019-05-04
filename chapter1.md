@@ -575,28 +575,32 @@ Our cross correlation function ```cross_correlation(series1,series2,tau)``` is a
 1. Create an empty vector ```corr```.
 2. Calculate the correlation values for tau from -2 seconds to +2 seconds. But for the loop you need the sampling units -- remember the 32 Hz. Use the heart rate as ```series1```.
 3. Create the cross correlation function ```corr_time``` from -2 to 2 seconds with the sampling rate of 32 Hz.
-3. Plot the cross correlation function.
+3. Plot the cross correlation function; remember that you also need a time axis for that.
 
 `@hint`
 - You can create an empty vector by ```c()```
 
 `@pre_exercise_code`
 ```{r}
-# create a correlation function for a defined timeshift ts in seconds
-correlation <- function(series1,series2,tau) {
+# create a correlation function for a defined timeshift tau in seconds
+cross_correlation <- function(series1,series2,tau) {
   # Calculate length 
   n1 <- length(series1)
   n2 <- length(series2)
-  
-  if (n1!=n2){
+  if (n1 != n2){
     stop("Series1 and series2 have unequal length!")
   }
-  corr <- 0
+  if (tau > n1/2){
+    stop("The value of tau exceeds half of the length of the series!")
+  }
+  # Calculate and subtract means
+  series1_detr = series1 - mean(series1)
+  series2_detr = series2 - mean(series2)
   # Calculate 
   if (tau >= 0){
-    corr <- sum(series2[1:(n1-tau)]*series1[(1+tau):n1])/(n1-tau)
+    corr <- mean(series1_detr[1:(n1-tau)]*series2_detr[(1+tau):n1])
   } else{
-    corr <- sum(series2[(1-tau):n1]*series1[1:(n1+tau)])/(n1-tau)
+    corr <- mean(series1_detr[(1-tau):n1]*series2_detr[1:(n1+tau)])
   }
   return(corr)
 }
@@ -646,10 +650,10 @@ corr <- c()
 
 # Calculate the correlation from -2 to 2 seconds and append the value to corr (replace ___)
 for (t in ___:___){
-	corr <- append(corr,correlation(___,___,t))
+	corr <- append(corr, cross_correlation(___,___,t))
 }
 
-# Create a time series for the correlation values
+# Create a time axis for the correlation values
 corr_time <- 
 
 # Plot the correlation
@@ -662,11 +666,11 @@ corr_time <-
 corr <- c()
 
 # Calculate the correlation from -2 to 2 seconds and append the value to corr (replace ___)
-for (t in -64:64){
-	corr <- append(corr,correlation(hf,resp,t))
+for (tau in -64:64){
+	corr <- append(corr,cross_correlation(hf,resp,tau))
 }
 
-# Create a time series for the correlation values
+# Create a time axis for the correlation values
 corr_time <- seq(-2,2,1/32)
 
 # Plot the correlationplot
