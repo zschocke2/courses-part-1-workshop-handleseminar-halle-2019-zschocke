@@ -18,7 +18,7 @@ In our second workshop we will have a look at heartbeat intervals and respiratio
 
 R peaks are large spikes in the ECG that mark the occurrence of the main heart contraction. Here we use a dataset of 36 000 heart beats, i.e. the clock-times of each R peak, from a single subject, single night.
 
-First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to divide each point by the sampling rate to obtain the time in seconds.
+First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to divide each point by the sampling rate to obtain the time in seconds. 
 
 `@instructions`
 1. Load data from the file "data.rri" and convert R-peak points into time in seconds (in one line).
@@ -284,7 +284,7 @@ xp: 100
 In the following task we want to compare heart rate and respiration. To compare both signals, we need the same sampling rate for both, with equidistant time steps.
 Thats why we need to resample our filtered heart rate signal ```hf_new``` to equidistant time steps and the same frequency as the respiration signal, 32 Hz.
 
-Here we will use a linear interpolation from the function ```approx(x=,y=,xout=)```. ```x```and ```y``` are the values of the signal, while ```xout``` contains the x-valuse we want to interpolate.
+Here we will use a linear interpolation from the function ```approx(x=,y=,xout=)```. ```x```and ```y``` are the values of the signal, while ```xout``` contains the x-values we want to interpolate.
 
 `@instructions`
 Your filtered data, which you have to use in the following exercises are still availabel under ```hf_new``` and ```time_new```.
@@ -292,7 +292,7 @@ Your filtered data, which you have to use in the following exercises are still a
 1. Create a time series from 0 to 3600 seconds with a sampling rate of 32 Hz. Store it to ```time_rs``` (rs = resampled)
 2. Use the ```approx()``` function to create a resampled signal! Store it to ```signal_approx```.
 3. ```approx()``` will return a nested list. To access the new hf-values, you have to use ```signal_approx$y```. Store it to ```hf_rs```.
-4. Plot the resampled data.
+4. Plot the first ten seconds of the resampled data to see how the resampling worked.
 
 `@hint`
 
@@ -338,8 +338,8 @@ signal_approx <-
 # Read the resampled signal from the nested list signal_approx
 hf_rs <- 
 
-# Plot the new data
-
+# Plot the first 10 seconds of the resampled data
+plot(
 ```
 
 `@solution`
@@ -354,7 +354,7 @@ signal_approx <- approx(x = time_new, y = hf_new, xout=time_rs)
 hf_rs <- signal_approx$y
 
 # Plot the new data
-plot(time_rs,hf_rs)
+plot(time_rs[1:320],hf_rs[1:320])
 ```
 
 `@sct`
