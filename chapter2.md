@@ -141,7 +141,7 @@ dim(mat)
 
 ---
 
-## Calculate PRSA curve
+## Plot PRSA curve and calculate DC
 
 ```yaml
 type: NormalExercise
