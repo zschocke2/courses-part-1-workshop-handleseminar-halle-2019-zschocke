@@ -566,7 +566,7 @@ We still want to answer our two questions:
 
 (b) Is there a characteristic time delay associated with the respiratory sinus arrhythmia? 
 
-Therefore, we have to look at the cross correlation function for various time delays tau, e.g. within the range from -2 to +2 seconds. The position of the largest peak will give the characteristic time delay, while the height of the peak will characterize the strength of respiratory sinus arrhythmia.
+Therefore, we have to look at the cross correlation function for various time delays tau, e.g. within the range from -4 to +4 seconds. The position of the largest peak will give the characteristic time delay, while the height of the peak will characterize the strength of respiratory sinus arrhythmia.
 
 
 
@@ -647,7 +647,7 @@ resp <- resp[1:(length(resp)-128)]
 # Create an empty vector corr
 corr <- c()
 
-# Calculate the cross ccorrelation from -2 to 2 seconds and append the value to corr (replace ___)
+# Calculate the cross ccorrelation from -4 to 4 seconds and append the value to corr (replace ___)
 for (t in ___:___){
 	corr <- append(corr, cross_correlation(___,___,t))
 }
@@ -664,7 +664,7 @@ corr_time <-
 # Create an empty vector corr
 corr <- c()
 
-# Calculate the cross ccorrelation from -2 to 2 seconds and append the value to corr (replace ___)
+# Calculate the cross ccorrelation from -4 to 4 seconds and append the value to corr (replace ___)
 for (tau in -128:128){
 	corr <- append(corr,cross_correlation(hf,resp,tau))
 }
