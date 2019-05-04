@@ -552,7 +552,7 @@ cross_correlation <- function(series1,series2,tau) {
 
 ---
 
-## Synchronisation via Crosscorrelation
+## Application of cross correlation
 
 ```yaml
 type: NormalExercise
@@ -560,20 +560,22 @@ key: 678902c4d8
 xp: 100
 ```
 
-Finally we have a resampled series of the heart rate and we have the respiration, both at 32 Hz sampling rate. Physiologically, the respiration is modulating the heart rate via the so-called **respiratory sinus arrhythmia**. We want to answer two questions:
+We still want to answer our two questions:
 
-(a) How strong is the respiratory sinus arrhythmia is this subject?  While the strength depends on the respiratory frequency, it can also be considered as a marker of cardiovascular health.
+(a) How strong is the respiratory sinus arrhythmia is this subject?  
 
-(b) Is there a characteristic time delay associated with the respiratory sinus arrhythmia?  I.e., do the peaks in heart rate coincide with the peaks in the respiration signal or are they typically shifted by a small amount of time, either backwards or forwards in time?
+(b) Is there a characteristic time delay associated with the respiratory sinus arrhythmia? 
+
+Therefore, we have to look at the cross correlation function for various time delays tau, e.g. within the range from -2 to +2 seconds. The position of the largest peak will give the characteristic time delay, while the height of the peak will characterize the strength of respiratory sinus arrhythmia.
 
 
 
 `@instructions`
-We have already created a correlation function ```correlation(series1,series2,tau)```. The heart rate is sill stored in ```hf``` and the respiration signal in ```resp```.
+Our cross correlation function ```cross_correlation(series1,series2,tau)``` is available. The heart rate is sill stored in ```hf``` and the respiration signal in ```resp```.
 1. Create an empty vector ```corr```.
-2. Calculate the correlation values for tau from -2 seconds to +2 seconds. (But for the loop you need the sampling units!) Use the heart rate as ```series1```.
-3. Create the time series ```corr_time``` from -2 to 2 seconds with the sampling rate of 32 Hz.
-3. Plot the correlation function
+2. Calculate the correlation values for tau from -2 seconds to +2 seconds. But for the loop you need the sampling units -- remember the 32 Hz. Use the heart rate as ```series1```.
+3. Create the cross correlation function ```corr_time``` from -2 to 2 seconds with the sampling rate of 32 Hz.
+3. Plot the cross correlation function.
 
 `@hint`
 - You can create an empty vector by ```c()```
