@@ -123,7 +123,7 @@ rri <- diff(scan('data.rri')/256)
 mat <- matrix(rep(0,40), 1, 40)
 
 # Loop over the RR intervals 
-for (i in (21:(length(rri)-20){
+for (i in (21:(length(rri)-20)){
   if (rri[i] > rri[i-1]){
     mat <- rbind(mat, rri[(i-20):(i+19)])
     }
@@ -149,7 +149,7 @@ key: cc320eca75
 xp: 100
 ```
 
-The so-called PRSA curve is the average of all rows of our large matrix.  The DC value is defined as DC = -PRSA(-2) -PRSA(-1) +PRSA(0) +PRSA(1), where the argument indicates the position with respect to the anchor points.
+The so-called PRSA curve is the average of all rows of our large matrix (except for the first row with zeros).  The DC value is defined as DC = -PRSA(-2) -PRSA(-1) +PRSA(0) +PRSA(1), where the argument indicates the position with respect to the anchor points.
 
 `@instructions`
 The matrix ```mat``` is still available from the previous exercise.  
@@ -162,7 +162,17 @@ The matrix ```mat``` is still available from the previous exercise.
 
 `@pre_exercise_code`
 ```{r}
-
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
+# Load data and divide by sampling rate to obtain signal in seconds; calculate RR-intervals
+rri <- diff(scan('data.rri')/256)
+# Create matrix with one row of 40 zeros.
+mat <- matrix(rep(0,40), 1, 40)
+# Loop over the RR intervals 
+for (i in (21:(length(rri)-20)){
+  if (rri[i] > rri[i-1]){
+    mat <- rbind(mat, rri[(i-20):(i+19)])
+    }
+  }
 ```
 
 `@sample_code`
