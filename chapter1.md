@@ -648,12 +648,12 @@ resp <- resp[1:(length(resp)-128)]
 # Create an empty vector corr
 corr <- c()
 
-# Calculate the correlation from -2 to 2 seconds and append the value to corr (replace ___)
+# Calculate the cross ccorrelation from -2 to 2 seconds and append the value to corr (replace ___)
 for (t in ___:___){
 	corr <- append(corr, cross_correlation(___,___,t))
 }
 
-# Create a time axis for the correlation values
+# Create a time axis for the cross ccorrelation values
 corr_time <- 
 
 # Plot the correlation
@@ -665,15 +665,15 @@ corr_time <-
 # Create an empty vector corr
 corr <- c()
 
-# Calculate the correlation from -2 to 2 seconds and append the value to corr (replace ___)
+# Calculate the cross ccorrelation from -2 to 2 seconds and append the value to corr (replace ___)
 for (tau in -64:64){
 	corr <- append(corr,cross_correlation(hf,resp,tau))
 }
 
-# Create a time axis for the correlation values
+# Create a time axis for the cross correlation values
 corr_time <- seq(-2,2,1/32)
 
-# Plot the correlationplot
+# Plot the correlation
 plot(corr_time,corr)
 ```
 
