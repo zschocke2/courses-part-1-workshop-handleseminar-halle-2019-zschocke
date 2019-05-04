@@ -28,6 +28,7 @@ The row that must be appended is rri[(100-20):(100+19)].
 
 `@pre_exercise_code`
 ```{r}
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 
 ```
 
@@ -78,28 +79,59 @@ key: fd2af61423
 xp: 100
 ```
 
-Now we want to find anchor points in the resampled RRI signal, which is still available under ```rri_rs``` and ```time_rs```.
+Now we want to find anchor points in the RRI signal. There are many of them for the calculation of deceleration capacity -- each RR interval that is longer than the preceding one will be regarded as an anchor point. And thus many rows will be added to our matrix.
 
 `@instructions`
-Run a loop over the RR interval time series, beginning with RR interval number 30 and ending 30 intervals before the last one.
-4. Identify the anchor points, where the RR interval is longer than the preceding RR interval.
+1. The first two steps are already there from the previous exercise.
+2. Run a loop over the RR interval time series, beginning with RR interval number 21 and ending 20 intervals before the last one.
+3. Identify the anchor points, where the RR interval is longer than the preceding RR interval. 
+4. For each anchor point, append the corresponding row to the large matrix.
+5. What is the size of the matrix?  Employ ```dim``` for this.
 
 `@hint`
-
+The anchor-point condition is rri[i] > rri[i-1]. The row rri[(i-20):(i+19)] must be appended.
 
 `@pre_exercise_code`
 ```{r}
-
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 ```
 
 `@sample_code`
 ```{r}
+# Load data and divide by sampling rate to obtain signal in seconds; calculate RR-intervals
+rri <- diff(scan('data.rri')/256)
+# Create matrix with one row of 40 zeros.
+mat <- matrix(rep(0,40), 1, 40)
 
+# Loop over the RR intervals 
+for (i in (__:___){
+  if (___){
+    mat <- rbind(___, ___)
+    }
+  }
+
+# Print the size of the matrix
+dim(___)
+     
 ```
 
 `@solution`
 ```{r}
+# Load data and divide by sampling rate to obtain signal in seconds; calculate RR-intervals
+rri <- diff(scan('data.rri')/256)
+# Create matrix with one row of 40 zeros.
+mat <- matrix(rep(0,40), 1, 40)
 
+# Loop over the RR intervals 
+for (i in (21:(length(rri)-20){
+  if (rri[i] > rri[i-1]){
+    mat <- rbind(mat, rri[(i-20):(i+19)])
+    }
+  }
+
+# Print the size of the matrix
+dim(mat)
+           
 ```
 
 `@sct`
