@@ -44,7 +44,7 @@ mat <- matrix(___, _, __)
 mat <- rbind(___, ___)
 
 # Print the matrix
-transpose(___)
+t(___)
 
 ```
 
@@ -60,7 +60,7 @@ mat <- matrix(rep(0,40), 1, 40)
 mat <- rbind(mat, rri[(100-20):(100+19)])
 
 # Print the matrix
-transpose(mat)
+t(mat)
 
 ```
 
