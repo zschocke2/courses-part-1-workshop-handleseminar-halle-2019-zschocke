@@ -169,7 +169,7 @@ rri <- diff(scan('data.rri')/256)
 # Create matrix with one row of 40 zeros.
 mat <- matrix(rep(0,40), 1, 40)
 # Loop over the RR intervals 
-for (i in (21:(length(rri)-20)){
+for (i in (21:(length(rri)-20))){
   if (rri[i] > rri[i-1]){
     mat <- rbind(mat, rri[(i-20):(i+19)])
     }
