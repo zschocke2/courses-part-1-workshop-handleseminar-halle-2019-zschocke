@@ -1,5 +1,5 @@
 ---
-title: 'Advanced Tasks'
+title: 'Advanced Task'
 description: ""
 ---
 
@@ -11,7 +11,7 @@ key: a1fcf27204
 xp: 100
 ```
 
-An alternative way to study the inter-relations between heart rate and respiratory activity is phase synchronization.  To calculate phase synchronization, you have to determine the instantaneous phases of both signals via a Hilbert transform, calculate the complex average of exp(i(phi_1 - phi_2)) over a segment of 60 seconds, take the absolute value and finally average over all 60 segments (of the 1h recordings).
+An alternative way to study the inter-relation between heart rate and respiratory activity is phase synchronization.  To calculate phase synchronization, you have to determine the instantaneous phases of both signals via a Hilbert transform, calculate the complex average of exp(i (phi_1 - phi_2)) over a segment of 60 seconds (i is the complex unit here), take the absolute value, and finally average over all 60 segments (of the 1h recordings).
 
 `@instructions`
 From chapter 1, we have the filtered heart rate data (```hf```) and the respiratory data (```resp```) available, both sampled at 32 Hz, and the time axis (```time```).
