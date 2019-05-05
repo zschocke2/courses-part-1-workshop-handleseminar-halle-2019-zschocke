@@ -18,7 +18,7 @@ In our second workshop we will have a look at heartbeat intervals and respiratio
 
 R peaks are large spikes in the ECG that mark the occurrence of the main heart contraction. Here we use a dataset of 36 000 heart beats, i.e. the clock-times of each R peak, from a single subject, single night.
 
-First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to divide each point by the sampling rate to obtain the time in seconds. 
+First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to divide each point by the sampling rate to obtain the time in seconds.
 
 `@instructions`
 1. Load data from the file "data.rri" and convert R-peak points into time in seconds (in one line).
@@ -567,8 +567,6 @@ We still want to answer our two questions:
 (b) Is there a characteristic time delay associated with the respiratory sinus arrhythmia? 
 
 Therefore, we have to look at the cross correlation function for various time delays tau, e.g. within the range from -4 to +4 seconds. The position of the largest peak will give the characteristic time delay, while the height of the peak will characterize the strength of respiratory sinus arrhythmia.
-
-
 
 `@instructions`
 Our cross correlation function ```cross_correlation(series1,series2,tau)``` is available. The heart rate is sill stored in ```hf``` and the respiration signal in ```resp```.
