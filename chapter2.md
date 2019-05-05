@@ -21,7 +21,7 @@ The approach can be generalized for an analysis of inter-relations between two (
 1. Load the long-term heartbeat recording "data.rri" from the previous chapter and calculate the RR intervals in seconds.  Remember that the numbers in the file are in sampling units at 256 Hz, and you need the differences.
 2. Set up a matrix with one row of 40 zeros; employ ```rep``` and ```matrix``` for this.
 3. Append to your matrix a row that is a partial copy of the RR interval time series around an anchor point -- here: RR interval number 100. Specifically, select 20 RR intervals prior to the anchor, the anchor itself, and 19 RR intervals behind the anchor. Employ ```rbind``` for the appending.
-4. Print the transposed matrix to check what has been done; employ ```transpose``` for this.
+4. Print the transposed matrix to check what has been done; employ ```t``` for this.
 
 `@hint`
 The row that must be appended is rri[(100-20):(100+19)].
