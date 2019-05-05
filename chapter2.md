@@ -104,7 +104,7 @@ rri <- diff(scan('data.rri')/256)
 mat <- matrix(rep(0,40), 1, 40)
 
 # Loop over the RR intervals 
-for (i in (__:___){
+for (i in (__:___)){
   if (___){
     mat <- rbind(___, ___)
     }
