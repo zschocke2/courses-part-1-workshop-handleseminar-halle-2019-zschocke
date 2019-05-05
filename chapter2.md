@@ -187,7 +187,7 @@ for (j in _:__){
 }
 
 # Plot of the PRSA curve
-plot(seq(___,___,_), ___)
+plot(seq(___,___,_), ___, "l")
 
 # Calculate DC value
 DC <- -PRSA[__]-PRSA[__]+PRSA[__]+PRSA[__]
