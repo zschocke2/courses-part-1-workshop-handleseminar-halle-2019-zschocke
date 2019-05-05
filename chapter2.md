@@ -190,7 +190,7 @@ for (j in _:__){
 plot(seq(___,___,_), ___)
 
 # Calculate DC value
-DC <- -PRSA[__]-PRSA[__]+PRSA[__]-PRSA[__]
+DC <- -PRSA[__]-PRSA[__]+PRSA[__]+PRSA[__]
 
 # Output of DC in milliseconds
 
@@ -207,10 +207,10 @@ for (j in 1:40){
 }
 
 # Plot of the PRSA curve
-plot(seq(-20,19,1), PRSA)
+plot(seq(-20,19,1), PRSA, "l")
 
 # Calculate DC value
-DC <- -PRSA[19]-PRSA[20]+PRSA[21]-PRSA[22]
+DC <- -PRSA[19]-PRSA[20]+PRSA[21]+PRSA[22]
 
 # Output of DC in milliseconds
 DC*1000
