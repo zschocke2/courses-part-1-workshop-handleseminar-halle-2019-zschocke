@@ -292,10 +292,11 @@ Your filtered data, which you have to use in this exercises are still available 
 1. Create a time series from 0 to 3600 seconds with a sampling rate of 32 Hz. Store it to ```time_rs``` (rs = resampled)
 2. Use the ```approx()``` function to create a resampled signal! Store it to ```signal_approx```.
 3. ```approx()``` will return a nested list. To access the new hf-values, you have to use ```signal_approx$y```. Store it to ```hf_rs```.
-4. Plot the first ten seconds of the resampled data to see how the resampling worked.
+4. Plot the **first 10 seconds** of the resampled data to see how the resampling worked. Use the plot argument ```xlim=c(START,END)``` to set the x-axis section!
 
 `@hint`
-
+- plot(x=___ ,y=___, xlim=c(___,___))
+- You have already a time series in seconds in ```time_rs```, so ```xlim``` is also in seconds!
 
 `@pre_exercise_code`
 ```{r}
@@ -339,7 +340,7 @@ signal_approx <-
 hf_rs <- 
 
 # Plot the first 10 seconds of the resampled data
-plot(
+
 ```
 
 `@solution`
@@ -353,8 +354,8 @@ signal_approx <- approx(x = time_new, y = hf_new, xout=time_rs)
 # Read the resampled signal from the nested list signal_approx
 hf_rs <- signal_approx$y
 
-# Plot the new data
-plot(time_rs[1:320],hf_rs[1:320])
+# Plot the first 10 seconds of the resampled data
+plot(time_rs,hf_rs,xlim=c(0,10))
 ```
 
 `@sct`
@@ -378,6 +379,7 @@ ex() %>% check_object("hf_rs") %>% check_equal()
 ex() %>% check_function("plot") %>% {
   check_arg(.,"x") %>% check_equal()
   check_arg(.,"y") %>% check_equal()
+  check_arg(.,"xlim") %>% check_equal()
 } #%>% check_equal()
 
 ex() %>% check_error()
@@ -404,7 +406,7 @@ Now we check out the other data set. The **respiration signal** comes from thora
 `@hint`
 - Do you remember ```seq(from=,to=,by=)```? 
 - You have different lengths? So maybe you have to reduce your time series by one?
-- You have already a time series in seconds in ```time_data```, so ```ylim``` is also in seconds!
+- You have already a time series in seconds in ```time_data```, so ```xlim``` is also in seconds!
 
 `@pre_exercise_code`
 ```{r}
@@ -468,7 +470,7 @@ key: 111b254e59
 xp: 100
 ```
 
-Finally we have a resampled series of the heart rate and we have the respiration, both at 32 Hz sampling rate. Physiologically, the respiration is modulating the heart rate via the so-called **respiratory sinus arrhythmia**. We want to answer two questions:
+Finally we have a resampled series of the heart rate and we have the respiration signal, both at 32 Hz sampling rate. Physiologically, the respiration is modulating the heart rate via the so-called **respiratory sinus arrhythmia**. We want to answer two questions:
 
 (a) How strong is the respiratory sinus arrhythmia is this subject?  While the strength depends on the respiratory frequency, it can also be considered as a marker of cardiovascular health.
 
@@ -477,7 +479,7 @@ Finally we have a resampled series of the heart rate and we have the respiration
 To address both questions, we have to calculate the cross correlation function between both time series.
 
 `@instructions`
-We have to set up a function called ```cross_correlation```. Its parameters are the two time series and the time delay tau that we want to look at.  Please complete the function definition.
+We have to set up a function called ```cross_correlation```. Its parameters are the two time series (```series1```,```series2```) and the time delay ```tau``` that we want to look at.  Please complete the function definition.
 1. Both time series must have equal length. An error message should be printed if the lengths are unequal (```!=```). 
 2. Another error message should be printed if the time delay exceeds half the length of the time series, since there would be insufficient statistics in such cases.
 3. The average values (means) of both time series must be calculated and then be subtracted from the data. The function ```mean(series)``` can be used for this purpose.
@@ -488,7 +490,42 @@ Remember length() for n1 and n2. If tau is positive, the mean for calculating th
 
 `@pre_exercise_code`
 ```{r}
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/f2663aa0a45d1bce64f9bbb6c8eb733aabbaca9e/SL196_thorax.txt',destfile='respiration.dat')
+download.file(url='https://assets.datacamp.com/production/repositories/4882/datasets/fefc3f655fd0c9fd6baeeb6528e68d9e55d57db4/SL196_1h.rri',destfile='data.rri')
 
+# Load data
+data <- scan('data.rri')/256
+
+# Calculate RRI
+rri <- diff(data)
+
+# Calculate time
+time <- data[1:(length(data)-1)]
+
+# Calculate heart rate in beats per minute
+hf <- 60/rri
+
+# Delete all entries lower then 40 beats/min and higher then 120 beats/min. 
+hf_new <- c()
+time_new <- c()
+
+for (i in 1:length(hf)){
+  if ((hf[i] > 40) & (hf[i] <120)){
+   hf_new <- append(hf_new,hf[i])
+    time_new <- append(time_new,time[i])
+  } 
+}
+
+# Resample hf_new data
+xout <- seq(1,3600,1/32)
+approx <- approx(x = time_new, y = hf_new,xout=xout)
+time <- approx$x
+hf <- approx$y
+hf <- hf[1:(length(hf)-129)]
+
+# Load respiration data
+resp <- scan('respiration.dat')
+resp <- resp[1:(length(resp)-128)]
 ```
 
 `@sample_code`
@@ -547,6 +584,48 @@ cross_correlation <- function(series1,series2,tau) {
 
 `@sct`
 ```{r}
+ex() %>% check_fun_def('cross_correlation') %>% {
+    check_arguments(.)
+    check_body(.) %>% {
+      check_function(., 'length')
+      check_function(., 'length', index = 2)
+      
+      check_if_else(.,1) %>%  {
+        check_cond(.) %>% {
+          check_code(., "n1")
+   		  check_code(., "!=")
+   		  check_code(., "n2")
+          }
+        check_if(.) %>% check_function(., "stop")
+        }
+      
+       check_if_else(.,2) %>%  {
+        check_cond(.) %>% {
+          check_code(., "tau")
+   		  check_code(., ">")
+   		  check_code(., c("n1/2","n2/2","n1*0.5","n2*0.5"))
+          }
+        check_if(.) %>% check_function(., "stop")
+        }
+      check_function(.,"mean") %>% check_arg(.,"x") 
+      check_function(.,"mean",index=2) %>% check_arg(.,"x")
+      check_code(.,c("series1-","series1 -","series1   -"))
+      check_code(.,c("series2-","series2 -","series2   -"))
+
+      check_if_else(.,3) %>%  {
+        check_cond(.) %>% {
+          check_code(., ">=")
+   		  check_code(., "tau")
+   		  check_code(., "0")
+          }
+        check_if(.) %>% check_function(., "mean") %>% check_arg(.,"x")
+        check_else(.) %>% check_function(., "mean") %>% check_arg(.,"x")
+        }
+    }
+    check_call(., hf, resp, 2) %>% check_result() %>% check_equal(incorrect_msg="Check your last if-condition")
+    check_call(., hf, resp, -2) %>% check_result() %>% check_equal(incorrect_msg="Check your last if-condition")
+  }
+
 
 ```
 
