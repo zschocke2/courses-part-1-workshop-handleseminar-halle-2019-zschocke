@@ -159,13 +159,13 @@ ex() %>% check_for() %>% {
     check_code(., "20")
     check_code(., "21")
     check_code(., ":")
-    check_code(.,"length(rri)")
+    check_code(.,"length(rri)",fixed=TRUE)
   }
   check_body(.) %>% {
-    check_if_else(1) %>%  {
+    check_if_else(.,1) %>%  {
       check_cond(.) %>% {
-        check_code(., "rri[i]")
-        check_code(., "rri[i-1]")
+        check_code(., "rri[i]",fixed=TRUE)
+        check_code(., "rri[i-1]",fixed=TRUE)
         }
       check_if(.) %>% check_function(., "rbind")       
       } 
