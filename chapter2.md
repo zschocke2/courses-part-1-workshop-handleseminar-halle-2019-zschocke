@@ -270,7 +270,12 @@ ex() %>% check_for() %>% {
     check_arg(., "values") %>% check_equal()
     }
   }
-
+ex() %>% check_function("plot") %>% {
+	check_arg(.,"x") %>% check_equal()
+	check_arg(.,"y") %>% check_equal()
+	}
+ex() %>% check_object("PRSA")%>%check_equal()
+ex() %>% check_object("DC")%>% check_equal()
 
 
 success_msg("You got it!")
