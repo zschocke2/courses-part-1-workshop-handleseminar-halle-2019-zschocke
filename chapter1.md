@@ -21,7 +21,7 @@ R peaks are large spikes in the ECG that mark the occurrence of the main heart c
 First the R-peaks are stored in sampling units of ```256 Hz```, which means we have to divide each point by the sampling rate to obtain the time in seconds.
 
 `@instructions`
-1. Load data from the file "data.rri" and convert R-peak points into time in seconds (in one line).
+1. Load data from the file ```"data.rri"``` and convert R-peak points into time in seconds (in one line).
 2. Calculate the RR intervals and save them to ```rri```. Use ```diff()```!
 3. Create a ```time```, a list which contains the timestamps of each RRI, directly taken from ```data```. (Check length of ```rri``` and ```time```; they should be the same)
 
@@ -95,7 +95,7 @@ key: e8803cd778
 xp: 100
 ```
 
-Now we will transform our RRIs to heart rates. The heart rate or the heart frequency is the reciprocal of the RRI value but in units of beats per minute (not beats per second).
+Now we will transform our RRIs to heart rates. The **heart rate or the heart frequency** is the reciprocal of the RRI value but in units of **beats per minute** (not beats per second).
 
 `@instructions`
 The RRIs are still available under ```rri```.
@@ -103,7 +103,7 @@ The RRIs are still available under ```rri```.
 2. Plot the heart rate against the time, ```time``` is still available.
 
 `@hint`
-
+- RRI is given in seconds. First, you can transform RRIs in minutes and then calculate the reciprocal. (Or like in the solution, you merge it to one step!)
 
 `@pre_exercise_code`
 ```{r}
@@ -282,12 +282,12 @@ xp: 100
 ```
 
 In the following task we want to compare heart rate and respiration. To compare both signals, we need the same sampling rate for both, with equidistant time steps.
-Thats why we need to resample our filtered heart rate signal ```hf_new``` to equidistant time steps and the same frequency as the respiration signal, 32 Hz.
+Thats why we need to resample our filtered heart rate signal ```hf_new``` to equidistant time steps and the same frequency as the respiration signal, **32 Hz**.
 
 Here we will use a linear interpolation from the function ```approx(x=,y=,xout=)```. ```x```and ```y``` are the values of the signal, while ```xout``` contains the x-values we want to interpolate.
 
 `@instructions`
-Your filtered data, which you have to use in the following exercises are still availabel under ```hf_new``` and ```time_new```.
+Your filtered data, which you have to use in this exercises are still available under ```hf_new``` and ```time_new```.
 
 1. Create a time series from 0 to 3600 seconds with a sampling rate of 32 Hz. Store it to ```time_rs``` (rs = resampled)
 2. Use the ```approx()``` function to create a resampled signal! Store it to ```signal_approx```.
@@ -683,7 +683,7 @@ ex() %>% check_for() %>% {
     check_code(., "-128")
     check_code(., "128")
   }
-  check_body(.)  %>% check_function("correlation") %>% {
+  check_body(.)  %>% check_function("cross_correlation") %>% {
      check_arg(.,"series1") %>% check_equal()
      check_arg(.,"series2") %>% check_equal()
   } %>% check_equal()
@@ -709,7 +709,7 @@ success_msg("Awwsome!")
 
 ---
 
-## Insert exercise title here
+## Check your result!
 
 ```yaml
 type: PureMultipleChoiceExercise
