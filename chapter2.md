@@ -219,8 +219,8 @@ for (i in (21:(length(rri)-20))){
 PRSA = ___
 
 # Loop over the 40 columns
-for (j in _:__){
-  PRSA <- append(___,mean(___,_]))
+for (j in ___:___){
+  PRSA <- append(___,mean(___))
 }
 
 # Plot of the PRSA curve
