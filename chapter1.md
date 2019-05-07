@@ -650,11 +650,11 @@ Therefore, we have to look at the cross correlation function for various time de
 `@instructions`
 Our cross correlation function ```cross_correlation(series1,series2,tau)``` is available. The heart rate is sill stored in ```hf``` and the respiration signal in ```resp```.
 1. Create an empty vector ```corr```.
-2. Calculate the correlation values for tau from -4 seconds to +4 seconds. But for the loop you need the sampling units -- remember the 32 Hz. Use the heart rate as ```series1```.
+2. Calculate the correlation values for ```tau``` from -4 seconds to +4 seconds. But for the loop you need the sampling units -- remember the 32 Hz. Use the heart rate as ```series1```.
 3. Plot the cross correlation function; remember that you also need a time axis for that.
 
 `@hint`
-Since the sampling rate is 32 Hz, -4 seconds corresponds to tau=-128, while +4 seconds corresponds to tau=+128.
+Since the sampling rate is 32 Hz, -4 seconds corresponds to ```tau=-128```, while +4 seconds corresponds to ```tau=+128```.
 
 `@pre_exercise_code`
 ```{r}
@@ -722,7 +722,7 @@ resp <- resp[1:(length(resp)-128)]
 `@sample_code`
 ```{r}
 # Create an empty vector corr
-corr <- c()
+corr <- 
 
 # Calculate the cross ccorrelation from -4 to 4 seconds and append the value to corr (replace ___)
 for (t in ___:___){
@@ -759,8 +759,8 @@ ex() %>% check_object("corr") %>% check_equal(incorrect_msg="Did you create an e
 
 ex() %>% check_for() %>% {
   check_cond(.) %>% {
-    check_code(., "-128")
-    check_code(., "128")
+    check_code(., c("-4*32","-32*4","-128"))
+    check_code(., c("4*32","32*4","128"))
   }
   check_body(.)  %>% check_function("cross_correlation") %>% {
      check_arg(.,"series1") %>% check_equal()
@@ -797,7 +797,7 @@ xp: 50
 ```
 
 Let's check the result from the last task again!
-![](https://assets.datacamp.com/production/repositories/4882/datasets/19cb7f8ba735d63a8c65f4e3c23c6fb19e60534a/corr.png)
+![](https://assets.datacamp.com/production/repositories/4882/datasets/ebea9b51ea739e0c937fa8e301abde28d95c98fa/corr.png)
 
 So we shifted the respiratory signal with respect to the heart rate. What is the time shift between respiration signal and heart rate signal?
 
