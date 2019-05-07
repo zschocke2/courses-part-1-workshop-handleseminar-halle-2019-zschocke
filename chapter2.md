@@ -13,18 +13,19 @@ xp: 100
 
 In the second part of this workshop we will use a **matrix** -- a two dimensional (rectangular) arrangement of data with identical type. Note that the term **array** is used for three (or even higher) dimensional objects in R.
 
-We will implement an approach called **phase rectified signal analysis** (PRSA), which is used to calculated a **deceleration capacity** (DC) index for long-term (24h) ECG recordings. The DC has been shown to predict the risk of mortality after an initial myocardial infarction, so that it can be used to identify subjects that would benefit from implanting an automated defibrillator.
+We will implement an approach called **phase rectified signal analysis** (PRSA), which is used to calculated a **deceleration capacity** (DC) index for long-term (24h) ECG recordings. The DC has been shown to predict the risk of mortality after an initial myocardial infarction, so that it can be used to identify subjects that would benefit from implanting an automated defibrillator (better known as pacemaker).
 
 The approach can be generalized for an analysis of inter-relations between two (or even more) signals, leading to the so-called **bivariate phase rectified signal analysis** (BPRSA).  However, we begin with the mono-variate version.
 
 `@instructions`
-1. Load the long-term heartbeat recording "data.rri" from the previous chapter and calculate the RR intervals in seconds.  Remember that the numbers in the file are in sampling units at 256 Hz, and you need the differences.
+1. Load the long-term heartbeat recording ```"data.rri"``` from the previous chapter and calculate the RR intervals in seconds.  Remember that the numbers in the file are in **sampling units at 256 Hz**, and you need the differences.
 2. Set up a matrix with one row of 40 zeros; employ ```rep``` and ```matrix``` for this.
 3. Append to your matrix a row that is a partial copy of the RR interval time series around an anchor point -- here: RR interval number 100. Specifically, select 20 RR intervals prior to the anchor, the anchor itself, and 19 RR intervals behind the anchor. Employ ```rbind``` for the appending.
-4. Print the transposed matrix to check what has been done; employ ```t``` for this.
+4. Print the transposed matrix to check what has been done; employ [```t```](https://www.rdocumentation.org/packages/base/versions/3.6.0/topics/t) for this.
 
 `@hint`
-The row that must be appended is rri[(100-20):(100+19)].
+- Use ```?rep```, ```?matrix```, ... to learn more about the functions!
+- The row that must be appended is ```rri[(100-20):(100+19)]```.
 
 `@pre_exercise_code`
 ```{r}
@@ -38,7 +39,7 @@ download.file(url='https://assets.datacamp.com/production/repositories/4882/data
 rri <- ___
 
 # Create matrix with one row of 40 zeros.
-mat <- matrix(___, _, __)
+mat <- matrix(___, ___, ___)
 
 # Append another row, which is a copy of the RR interval series around the element with index 100.
 mat <- rbind(___, ___)
@@ -54,7 +55,7 @@ t(___)
 rri <- diff(scan('data.rri')/256)
 
 # Create matrix with one row of 40 zeros.
-mat <- matrix(rep(0,40), 1, 40)
+mat <- matrix(data=rep(x=0,times=40), nrow=1, ncol=40)
 
 # Append another row, which is a copy of the RR interval series around the element with index 100.
 mat <- rbind(mat, rri[(100-20):(100+19)])
@@ -66,7 +67,24 @@ t(mat)
 
 `@sct`
 ```{r}
+ex() %>% check_object("rri") %>% check_equal(incorrect_msg = "Did you use scan() and diff()? And did you transform the signal in seconds?")
+ex() %>% check_function("matrix") %>% {
+  check_arg(.,"data") %>% check_equal()
+  check_arg(.,"nrow") %>% check_equal()
+  check_arg(.,"ncol") %>% check_equal()
+}
+ex() %>% check_function("rep") %>% {
+  check_arg(.,"x") %>% check_equal()
+  check_arg(.,"times") %>% check_equal()
+}
 
+ex() %>% check_function("rbind") %>% check_result()
+
+ex() %>% check_object("mat") %>% check_equal()
+
+ex() %>% check_function("t") %>% check_arg("x") %>% check_equal()
+
+success_msg("Good job.")
 ```
 
 ---
@@ -85,7 +103,7 @@ Now we want to find anchor points in the RRI signal. There are many of them for 
 1. The first two steps are already there from the previous exercise.
 2. Run a loop over the RR interval time series, beginning with RR interval number 21 and ending 20 intervals before the last one.
 3. Identify the anchor points, where the RR interval is longer than the preceding RR interval. 
-4. For each anchor point, append the corresponding row to the large matrix.
+4. For each anchor point, append the corresponding row to the large matrix. (Use brackets if you calculate index values!)
 5. What is the size of the matrix?  Employ ```dim``` for this.
 
 `@hint`
@@ -136,7 +154,26 @@ dim(mat)
 
 `@sct`
 ```{r}
-
+ex() %>% check_for() %>% {
+  check_cond(.) %>% {
+    check_code(., "20")
+    check_code(., "21")
+    check_code(., ":")
+    check_code(.,"length(rri)")
+  }
+  check_body(.) %>% {
+    check_if_else(1) %>%  {
+      check_cond(.) %>% {
+        check_code(., "rri[i]")
+        check_code(., "rri[i-1]")
+        }
+      check_if(.) %>% check_function(., "rbind")       
+      } 
+  } 
+}
+ex() %>% check_object("mat") %>% check_equal()
+ex() %>% check_function("dim") %>% check_result()
+success_msg("Nice work!")
 ```
 
 ---
