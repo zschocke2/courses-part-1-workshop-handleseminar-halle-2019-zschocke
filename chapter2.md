@@ -256,5 +256,22 @@ DC*1000
 
 `@sct`
 ```{r}
+ex() %>% check_function("c")
 
+ex() %>% check_for() %>% {
+  check_cond(.) %>% {
+    check_code(., "j")
+    check_code(., "in")
+    check_code(.,"1")
+    check_code(., "40")
+    }
+  check_body(.) %>% check_function("append") %>% {
+    check_arg(., "x") %>% check_equal()
+    check_arg(., "values") %>% check_equal()
+    }
+  }
+
+
+
+success_msg("You got it!")
 ```
