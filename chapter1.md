@@ -486,7 +486,7 @@ We have to set up a function called ```cross_correlation```. Its parameters are 
 4. The actual cross correlation is defined as the mean product of ```series1[i]``` times ```series2[i+tau]```. Take care that the mean includes only terms with indices ```i``` and ```i+tau``` that are within the defined range of the series, i.e. between 1 and the length. This can be implemented more easily, if the case of negative tau is considered separately.
 
 `@hint`
-Remember length() for n1 and n2. If tau is positive, the mean for calculating the cross correlation can begin with series1[1], but must end before series1[n1], since series2[n1+tau] does not exist. The last existing series2[i+tau] is for i=n1-tau.
+Remember ```length()``` for ```n1``` and ```n2```. If tau is positive, the mean for calculating the cross correlation can begin with ```series1[1]```, but must end before ```series1[n1]```, since ```series2[n1+tau]``` does not exist. The last existing ```series2[i+tau]``` is for i=n1-tau.
 
 `@pre_exercise_code`
 ```{r}
@@ -622,8 +622,8 @@ ex() %>% check_fun_def('cross_correlation') %>% {
         check_else(.) %>% check_function(., "mean") %>% check_arg(.,"x")
         }
     }
-    check_call(., hf, resp, 2) %>% check_result() %>% check_equal(incorrect_msg="Check your last if-condition")
-    check_call(., hf, resp, -2) %>% check_result() %>% check_equal(incorrect_msg="Check your last if-condition")
+    check_call(., hf, resp, 2) %>% check_result(error_msg ="Your function doesn't work properly") %>% check_equal(incorrect_msg="Check your last if-body")
+    check_call(., hf, resp, -2) %>% check_result(error_msg ="Your function doesn't work properly") %>% check_equal(incorrect_msg="Check your last else-body")
   }
 
 
